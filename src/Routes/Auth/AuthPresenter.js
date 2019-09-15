@@ -1,6 +1,8 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
-
+import Input from "../../Components/Input";
+import Button from "../../Components/Button";
 
 const Wrapper = styled.div`
     min-height: 80vh;
@@ -27,14 +29,64 @@ const Link = styled.span`
     cursor: pointer;
 `;
 
+const Form = styled(Box)`
+    padding: 40px;
+    padding-bottom: 30px;
+    margin-bottom: 15px;
+    form {
+        width: 100%;
+        input {
+            width: 100%;
+            &:not(:last-child) {
+                margin-bottom: 7px;
+            }
+        }
+        button {
+            margin-top: 10px;
+        }
+    }
+`;
+
 
 export default ({
     action, 
     setAction,
+    userName,
+    email,
+    firstName,
+    lastName,
+    secret
 }) => (
     <Wrapper>
+        <Form>
+            {action === "logIn" && (
+                <React.Fragment>
+                    <Helmet>
+                        <title>Log In | Prismagram</title>
+                    </Helmet>
+                        <form>
+                            <Input placeholder={"Email"} {...email} type="email" />
+                            <Button text={"Log In"} />
+                        </form>
+                </React.Fragment>
+            )}
+            {action === "signUp" && (
+                <React.Fragment>
+                    <Helmet>
+                        <title>Sign Up | Prismagram</title>
+                    </Helmet>
+                    <form>
+                        <Input placeholder={"userName"} {...userName} />
+                        <Input placeholder={"First name"} {...firstName} />
+                        <Input placeholder={"Last name"} {...lastName} />
+                        <Input placeholder={"Email"} {...email} type="email" />
+                        <Button text={"Sign up"} />
+                    </form>
+                </React.Fragment>
+            )}
+        </Form>
         <StateChanger>
-            { action === "logIn"? (
+            {action === "logIn"? (
                 <React.Fragment>
                     Don't have an account?{" "}
                     <Link onClick={() => setAction("signUp")}>Sign up</Link>
