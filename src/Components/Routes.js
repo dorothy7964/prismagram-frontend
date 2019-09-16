@@ -18,7 +18,6 @@ const LoggedOutRoutes = () => (
 const Routes = ({ isLoggedIn }) => 
     isLoggedIn? <LoggedInRoutes /> : <LoggedOutRoutes />;
 
-
 Routes.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired
 };

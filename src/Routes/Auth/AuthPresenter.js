@@ -55,7 +55,8 @@ export default ({
     email,
     firstName,
     lastName,
-    secret
+    secret,
+    onSubmit
 }) => (
     <Wrapper>
         <Form>
@@ -64,10 +65,10 @@ export default ({
                     <Helmet>
                         <title>Log In | Prismagram</title>
                     </Helmet>
-                        <form>
-                            <Input placeholder={"Email"} {...email} type="email" />
-                            <Button text={"Log In"} />
-                        </form>
+                    <form onSubmit={onSubmit}>
+                        <Input placeholder={"Email"} {...email} type="email" />
+                        <Button text={"Log In"} />
+                    </form>
                 </React.Fragment>
             )}
             {action === "signUp" && (
@@ -75,7 +76,7 @@ export default ({
                     <Helmet>
                         <title>Sign Up | Prismagram</title>
                     </Helmet>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <Input placeholder={"userName"} {...userName} />
                         <Input placeholder={"First name"} {...firstName} />
                         <Input placeholder={"Last name"} {...lastName} />

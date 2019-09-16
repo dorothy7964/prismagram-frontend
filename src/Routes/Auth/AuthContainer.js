@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import AuthPresenter from "./AuthPresenter";
 import useInput from "../../Hooks/useInput";
+import { useMutation } from "react-apollo-hooks";
+import { LOG_IN } from "./AuthQueries";
 
 export default () => {
     const [action, setAction] = useState("logIn");
@@ -9,15 +11,17 @@ export default () => {
     const firstName = useInput("");
     const lastName = useInput("");
     const secret = useInput("");
+    const [requestSecretMutation] = useMutation(LOG_IN, {
+        variables: { email: email.value }
+    });
 
-    console.log(
-        "userName",userName,
-        "firstName",firstName,
-        "lastName",lastName,
-        "email",email,
-        "secret",secret,
-    );
-
+    const onSubmit = e => {
+        e.preventDefault();
+        if(email !== ""){
+            requestSecretMutation();
+        }
+    };
+    
     return (
         <AuthPresenter 
             action={action} 
@@ -27,6 +31,7 @@ export default () => {
             firstName={firstName}
             lastName={lastName}
             secret={secret}
+            onSubmit={onSubmit}
         />
     );
 };
