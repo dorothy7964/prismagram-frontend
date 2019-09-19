@@ -85,19 +85,32 @@ export default ({
                     </form>
                 </React.Fragment>
             )}
-        </Form>
-        <StateChanger>
-            {action === "logIn"? (
+            {action === "confirm" && (
                 <React.Fragment>
-                    Don't have an account?{" "}
-                    <Link onClick={() => setAction("signUp")}>Sign up</Link>
-                </React.Fragment>
-                ) : (
-                <React.Fragment>
-                    Have an account?{" "}
-                    <Link onClick={() => setAction("logIn")}>Log in</Link>
+                    <Helmet>
+                        <title>Confirm Secret | Prismagram</title>
+                    </Helmet>
+                    <form onSubmit={onSubmit}>
+                        <Input placeholder="Paste your secret" required {...secret} />
+                        <Button text={"Confirm"} />
+                    </form>
                 </React.Fragment>
             )}
-        </StateChanger>
+        </Form>
+        {action !== "confirm" && (
+            <StateChanger>
+                {action === "logIn"? (
+                    <React.Fragment>
+                        Don't have an account?{" "}
+                        <Link onClick={() => setAction("signUp")}>Sign up</Link>
+                    </React.Fragment>
+                    ) : (
+                    <React.Fragment>
+                        Have an account?{" "}
+                        <Link onClick={() => setAction("logIn")}>Log in</Link>
+                    </React.Fragment>
+                )}
+            </StateChanger>
+        )}
     </Wrapper>
 );
