@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import AuthPresenter from "./AuthPresenter";
-import useInput from "../../Hooks/useInput";
 import { useMutation } from "react-apollo-hooks";
+import { toast } from "react-toastify";
+import useInput from "../../Hooks/useInput";
+import AuthPresenter from "./AuthPresenter";
 import { 
     LOG_IN,
     CREATE_ACCOUNT,
     CONFIRM_SECRET,
     LOCAL_LOG_IN
 } from "./AuthQueries";
-import { toast } from "react-toastify";
+
 
 export default () => {
     const [action, setAction] = useState("logIn");

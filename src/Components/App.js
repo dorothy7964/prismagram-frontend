@@ -9,6 +9,7 @@ import GlobalStyles from '../Styles/GlobalStyles';
 import Theme from "../Styles/Theme";
 import Routes from "./Routes";
 import Footer from "./Footer";
+import Header from "./Header";
 
 const QUERY = gql`
   {
@@ -32,10 +33,13 @@ export default () => {
       <React.Fragment>
         <GlobalStyles />
         <Router>
-          <Wrapper>
-            <Routes isLoggedIn={isLoggedIn} />
-            <Footer />
-          </Wrapper>
+          <React.Fragment>
+            {isLoggedIn && <Header />}
+            <Wrapper>
+              <Routes isLoggedIn={isLoggedIn} />
+              <Footer />
+            </Wrapper>
+          </React.Fragment>
         </Router>
         <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
       </React.Fragment>
