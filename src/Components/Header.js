@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../Hooks/useInput";
 import Input from "./Input";
@@ -62,9 +62,13 @@ const HeaderLink = styled(Link)`
     }
 `;
 
-export default (() => {
+export default withRouter(({ history }) => {
     const search = useInput("");
-
+    const onSearchSubmit = e => {
+        e.preventDefault();
+        history.push(`search?term=${search.value}`);
+        console.log(history);
+    }
     return(
         <Header>
             <HeaderWrapper>
@@ -74,7 +78,7 @@ export default (() => {
                     </Link>
                 </HeaderColumn>
                 <HeaderColumn>
-                    <form>
+                    <form onSubmit={onSearchSubmit}>
                         <SearchInput
                             value={search.value}
                             onChange={search.onChange}
