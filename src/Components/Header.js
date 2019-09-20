@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import useInput from "../Hooks/useInput";
 import Input from "./Input";
+import { Logo, Compass, HeartEmpty, User } from "./Icons";
+
 
 const Header = styled.header`
     width: 100%;
@@ -62,14 +64,13 @@ const HeaderLink = styled(Link)`
 
 export default (() => {
     const search = useInput("");
-    console.log(search);
 
     return(
         <Header>
             <HeaderWrapper>
                 <HeaderColumn>
                     <Link to="/">
-                        Logo
+                        <Logo />
                     </Link>
                 </HeaderColumn>
                 <HeaderColumn>
@@ -83,10 +84,13 @@ export default (() => {
                 </HeaderColumn>
                 <HeaderColumn>
                     <HeaderLink to="/explore">
-                        Compass
+                        <Compass />
                     </HeaderLink>
                     <HeaderLink to="/notifications">
-                        HeartEmpty
+                        <HeartEmpty />
+                    </HeaderLink>
+                    <HeaderLink to="/#">
+                        <User />
                     </HeaderLink>
                 </HeaderColumn>
             </HeaderWrapper>
