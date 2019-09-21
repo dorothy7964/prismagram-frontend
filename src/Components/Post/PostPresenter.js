@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
 
@@ -37,6 +38,17 @@ const Files = styled.div`
     flex-direction: column;
     align-items: stretch;
     flex-shrink: 0;
+`;
+
+const File = styled.div`
+    max-width: 100%;
+    width: 100%;
+    height: 600px;
+    position: absolute;
+    top: 0;
+    background-image: url(${props => props.src});
+    background-size: cover;
+    background-position: center;
 `;
 
 const Meta = styled.div`
@@ -111,19 +123,23 @@ export default ({
             </UserColumn>
         </Header>
         <Files>
-            files
+            {files &&
+                files.map((file) => (
+                <File key={file.id} src={file.url} />
+            ))}
         </Files>
         <Meta>
             <Buttons>
                 <Button>
-                    isLiked
+                    {isLiked? <HeartFull /> : <HeartEmpty />}
                 </Button>
                 <Button>
-                    CommentIcon
+                    <CommentIcon />
                 </Button>
             </Buttons>
+            <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
             <Caption>
-                caption
+                <FatText text={userName} /> {caption}
             </Caption>
             <Comments>
                 <Comment>
@@ -136,9 +152,7 @@ export default ({
                     Comment
                 </Comment>
             </Comments>
-            <Timestamp>
-                createdAt
-            </Timestamp>
+            <Timestamp>{createdAt}</Timestamp>
             <Textarea>
                 Textarea
             </Textarea>
