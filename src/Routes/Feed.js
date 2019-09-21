@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
 import Loader from "../Components/Loader";
+import Post from "../Components/Post";
 
 const FEED_QUERY = gql`
     {
@@ -20,12 +21,17 @@ const FEED_QUERY = gql`
                 id
                 url
             }
+            isLiked
+            likeCount
             comments {
                 id
                 text
+                user {
+                    id
+                    userName
+                }
             }
-            isLiked
-            likeCount
+            createdAt
         }
     }
 `;
@@ -39,7 +45,6 @@ const Wrapper = styled.div`
 
 export default () => {
     const { data, loading } = useQuery(FEED_QUERY);
-    if(data){console.log(data.seeFeed)};
     return (
         <Wrapper>
             <Helmet>
@@ -49,9 +54,20 @@ export default () => {
             {!loading &&
               data &&
               data.seeFeed &&
-              "we have photos"
-             }
-            
+              data.seeFeed.map(post => (
+                <Post 
+                    key={post.id}
+                    id={post.id}
+                    location={post.location}
+                    caption={post.caption}
+                    user={post.user}
+                    files={post.files}
+                    isLiked={post.isLiked}
+                    likeCount={post.likeCount}
+                    comments={post.comments}
+                    createdAt={post.createdAt}
+                />
+            ))}
         </Wrapper>
     );
 };
