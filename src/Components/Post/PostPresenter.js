@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Avatar from "../Avatar";
+import FatText from "../FatText";
 
 const Post = styled.div`
     ${props => props.theme.whiteBox};
@@ -102,10 +104,10 @@ export default ({
 }) => (
     <Post>
         <Header>
-            Avatar 
+            <Avatar size="sm" url={avatar} /> 
             <UserColumn>
-                userName
-                <Location>location</Location>
+                <FatText text={userName} />
+                <Location>{location}</Location>
             </UserColumn>
         </Header>
         <Files>
