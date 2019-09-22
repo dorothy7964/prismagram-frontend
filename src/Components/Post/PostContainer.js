@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import PostPresenter from "./PostPresenter";
 
@@ -13,12 +13,24 @@ const PostContainer = ({
     comments,
     createdAt
 }) => {
+    const [currentItem, setCurrentItem] = useState(0);
+    
+    useEffect(() => {
+        const totalFiles = files.length;
+        if(currentItem === totalFiles-1){
+            setTimeout(() => setCurrentItem(0), 3000);
+        }else {
+            setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+        }
+    }, [currentItem, files]);
+
     return (
         <PostPresenter 
             location={location}
             caption={caption}
             user={user}
             files={files}
+            currentItem={currentItem}
             isLiked={isLiked}
             likeCount={likeCount}
             comments={comments}
@@ -57,5 +69,3 @@ PostContainer.propTypes = {
     createdAt: PropTypes.string.isRequired
 }
 export default PostContainer;
-
-
