@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import TextareaAutosize from "react-textarea-autosize";
 import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
@@ -94,7 +95,7 @@ const Timestamp = styled.span`
     border-bottom: ${props => props.theme.lightGreyColor} 1px solid;
 `;
 
-const Textarea = styled.div`
+const Textarea = styled(TextareaAutosize)`
     border: none;
     width: 100%;
     resize: none;
@@ -153,9 +154,9 @@ export default ({
                 </Comment>
             </Comments>
             <Timestamp>{createdAt}</Timestamp>
-            <Textarea>
-                Textarea
-            </Textarea>
+            <Textarea 
+                placeholder={"Add a comment..."}     
+            />
         </Meta>
     </Post>
 );
