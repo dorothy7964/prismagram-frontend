@@ -115,6 +115,7 @@ export default ({
     currentItem,
     isLiked,
     likeCount,
+    toggleLike,
     comments,
     createdAt
 }) => (
@@ -134,7 +135,7 @@ export default ({
         </Files>
         <Meta>
             <Buttons>
-                <Button>
+                <Button onClick={toggleLike}>
                     {isLiked? <HeartFull /> : <HeartEmpty />}
                 </Button>
                 <Button>
