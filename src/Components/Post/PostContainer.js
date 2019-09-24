@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useMutation } from "react-apollo-hooks";
+import useInput from "../../Hooks/useInput";
 import { TOGGLE_LIKE } from "./PostQueries";
 import PostPresenter from "./PostPresenter";
 
@@ -15,6 +16,8 @@ const PostContainer = ({
     comments,
     createdAt
 }) => {
+    const comment = useInput("");
+    const [selfComments, setSelfComments] = useState([]);
     const [currentItem, setCurrentItem] = useState(0);
     const [isLikedS, setIsLiked] = useState(isLiked);
     const [likeCountS, setLikeCount] = useState(likeCount);
@@ -42,6 +45,21 @@ const PostContainer = ({
         }
     };
 
+    const onKeyPress = e => {
+       if(e.charCode === 13){
+            e.preventDefault();
+            comment.setValue("");
+            setSelfComments([
+                ...selfComments,
+                {
+                    id: Math.floor(Math.random() * 100),
+                    text: comment.value,
+                    user: { userName: "TEST" }
+                }
+            ]);
+       }
+    };
+
     return (
         <PostPresenter 
             location={location}
@@ -53,6 +71,9 @@ const PostContainer = ({
             likeCount={likeCountS}
             toggleLike={toggleLike}
             comments={comments}
+            newComment={comment}
+            selfComments={selfComments}
+            onKeyPress={onKeyPress}
             createdAt={createdAt}
         />
     );
