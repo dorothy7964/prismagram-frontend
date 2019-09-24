@@ -146,17 +146,16 @@ export default ({
             <Caption>
                 <FatText text={userName} /> {caption}
             </Caption>
-            <Comments>
-                <Comment>
-                    Comment
-                </Comment>
-                <Comment>
-                    Comment
-                </Comment>
-                <Comment>
-                    Comment
-                </Comment>
-            </Comments>
+            {comments && (
+                <Comments>
+                    {comments.map(comment => (
+                        <Comment key={comment.id}>
+                            <FatText text={comment.user.userName} />
+                            {comment.text}
+                        </Comment>
+                    ))}
+                </Comments>
+            )} 
             <Timestamp>{createdAt}</Timestamp>
             <Textarea 
                 placeholder={"Add a comment..."}     
