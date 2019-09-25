@@ -29,13 +29,15 @@ const PostContainer = ({
     const [addCommentMutation] = useMutation(ADD_COMMENT, {
         variables: { postId: id, text: comment.value }
     });
-    
+
     useEffect(() => {
         const totalFiles = files.length;
         if(currentItem === totalFiles-1){
-            setTimeout(() => setCurrentItem(0), 3000);
+            const timer = setTimeout(() => setCurrentItem(0), 3000);
+            return () => clearTimeout(timer);
         }else {
-            setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+            const timer = setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+            return () => clearTimeout(timer);
         }
     }, [currentItem, files]);
 
