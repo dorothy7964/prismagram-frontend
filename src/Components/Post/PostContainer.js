@@ -32,13 +32,13 @@ const PostContainer = ({
 
     useEffect(() => {
         const totalFiles = files.length;
+        let timer = null;
         if(currentItem === totalFiles-1){
-            const timer = setTimeout(() => setCurrentItem(0), 3000);
-            return () => clearTimeout(timer);
+            timer = setTimeout(() => setCurrentItem(0), 3000);
         }else {
-            const timer = setTimeout(() => setCurrentItem(currentItem + 1), 3000);
-            return () => clearTimeout(timer);
+            timer = setTimeout(() => setCurrentItem(currentItem + 1), 3000);
         }
+        return () => clearTimeout(timer);
     }, [currentItem, files]);
 
     const toggleLike = () => {
