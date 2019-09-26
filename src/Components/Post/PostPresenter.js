@@ -5,6 +5,7 @@ import moment from "moment";
 import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
+import TimeIapse from "../TimeIapse";
 
 const Post = styled.div`
     ${props => props.theme.whiteBox};
@@ -77,7 +78,9 @@ const Caption = styled.div`
 `;
 
 const Comments = styled.ul`
+    word-wrap: break-word;
     margin-top: 10px;
+    line-height: 17px;
 `;
 
 const Comment = styled.li`
@@ -85,6 +88,14 @@ const Comment = styled.li`
     span {
         margin-right: 5px;
     }
+`;
+
+const TimeForm = styled.div`
+    display: inline-block;
+    font-weight: 400;
+    opacity: 0.5;
+    font-size: 12px;
+    padding-left: 5px;
 `;
 
 const Timestamp = styled.span`
@@ -156,16 +167,23 @@ export default ({
                         <Comment key={comment.id}>
                             <FatText text={comment.user.userName} />
                             {comment.text}
+                            <TimeForm>
+                                <TimeIapse createAt={comment.createdAt} />
+                            </TimeForm>
                         </Comment>
                     ))}
                     {selfComments.map(comment => (
                         <Comment key={comment.id}>
                             <FatText text={comment.user.userName} />
                             {comment.text}
+                            <TimeForm>
+                                <TimeIapse createAt={moment().format("YYYY-MM-DDTHH:mm:ssZ")} />
+                            </TimeForm>
                         </Comment>
                     ))}
                 </Comments>
-            )} 
+            )}
+
             <Timestamp>{ moment(createdAt).format("YYYY.MM.DD HH:MM") }</Timestamp>
             <Textarea 
                 placeholder={"Add a comment..."}  
