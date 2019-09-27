@@ -7,8 +7,7 @@ import UserCard from '../../Components/UserCard';
 import SquarePost from '../../Components/SquarePost';
 
 const Wrapper = styled.div`
-    height: 50vh;
-    text-align: center;
+    height: 100%;
 `;
 
 const Section = styled.div`
@@ -65,7 +64,7 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
                         data.searchPost.map(post => (
                             <SquarePost 
                                 key={post.id}
-                                files={post.files[0]}
+                                file={post.files[0]}
                                 likeCount={post.likeCount}
                                 commentCount={post.commentCount}
                             />
