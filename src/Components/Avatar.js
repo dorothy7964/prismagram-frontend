@@ -17,20 +17,9 @@ const getSize = size => {
     `;
 }
 
-const getURL = avata => {
-    if(avata === null){
-        return `
-            background-image:url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png);
-        `;
-    }
-    return `
-        background-image:url(${avata});
-    `;
-}
-
 const Container = styled.div`
     ${props => getSize(props.size)} 
-    ${props => getURL(props.url)} 
+    background-image:url(${props => props.url});
     background-size:cover;
     border-radius:50%;
 `;
