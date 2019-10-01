@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import TextareaAutosize from "react-textarea-autosize";
 import moment from "moment";
@@ -138,7 +139,9 @@ export default ({
         <Header>
             <Avatar size="sm" url={avatar} /> 
             <UserColumn>
-                <FatText text={userName} />
+                <Link to={`/${userName}`}>
+                    <FatText text={userName} />
+                </Link>
                 <Location>{location}</Location>
             </UserColumn>
         </Header>
