@@ -62,7 +62,7 @@ const Posts = styled.div`
     grid-gap: 28px;;
 `;
 
-export default ({ data, loading }) => {
+export default ({ data, loading, logOut }) => {
     if(loading === true){
         return (
             <Wrapper>
@@ -98,7 +98,7 @@ export default ({ data, loading }) => {
                         <UserNameRow>
                             <UserName>{userName}</UserName>{" "}
                             {isSelf? (
-                                <Button text="Log Out" />
+                                <Button onClick={logOut} text="Log Out" />
                                 
                             ) : (
                                 <FollowButton id={id} isFollowing={isFollowing} />
