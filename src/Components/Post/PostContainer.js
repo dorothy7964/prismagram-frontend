@@ -115,5 +115,6 @@ PostContainer.propTypes = {
     isLiked: PropTypes.bool.isRequired,
     likeCount: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired
-}
+};
+
 export default PostContainer;
