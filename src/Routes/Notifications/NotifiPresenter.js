@@ -1,12 +1,9 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
-import Avatar from "../../Components/Avatar";
 import FatText from "../../Components/FatText";
 import UserCard from "../../Components/UserCard";
-import FollowButton from "../../Components/FollowButton";
 
 const Wrapper = styled.div`
     height: 100%;
@@ -39,6 +36,9 @@ export default ({ data, loading }) => {
         } = data;
         return (
             <Wrapper>
+                <Helmet>
+                    <title> notifications | Prismagram</title>
+                </Helmet>
                 <Section>
                     {followers.length === 0? (
                             <FatText text="No notifications" />
