@@ -30,16 +30,19 @@ const PostContainer = ({
         variables: { postId: id, text: comment.value }
     });
 
-    useEffect(() => {
+    
+    const slide = () => {
         const totalFiles = files.length;
-        let timer = null;
-        if(currentItem === totalFiles-1){
-            timer = setTimeout(() => setCurrentItem(0), 3000);
-        }else {
-            timer = setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+        if (currentItem === totalFiles - 1) {
+            setTimeout(() => setCurrentItem(0), 3000);
+        } else {
+            setTimeout(() => setCurrentItem(currentItem + 1), 3000);
         }
-        return () => clearTimeout(timer);
-    }, [currentItem, files]);
+    };
+
+    useEffect(() => {
+        slide();
+    });
 
     const toggleLike = () => {
         toggleLikeMutation();
