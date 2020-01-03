@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import Loader from "../../Components/Loader";
@@ -7,6 +8,7 @@ import Button from "../../Components/Button";
 import FollowButton from "../../Components/FollowButton";
 import FatText from "../../Components/FatText";
 import SquarePost from "../../Components/SquarePost";
+import { Edit } from "../../Components/Icons";
 
 const Wrapper = styled.div`
     min-height: 100vh;
@@ -31,6 +33,10 @@ const UserNameRow = styled.div`
 const UserName = styled.span`
     font-size: 26px;
     display: block;
+    margin-right: 10px;
+`;
+
+const ButtonLink = styled(Link)`
     margin-right: 10px;
 `;
 
@@ -98,8 +104,12 @@ export default ({ data, loading, logOut }) => {
                         <UserNameRow>
                             <UserName>{userName}</UserName>{" "}
                             {isSelf? (
-                                <Button onClick={logOut} text="Log Out" />
-                                
+                                <React.Fragment>
+                                    <ButtonLink to={`/editProfile/${userName}`}>
+                                        <Edit />
+                                    </ButtonLink>
+                                    <Button onClick={logOut} text="Log Out" />
+                                </React.Fragment>
                             ) : (
                                 <FollowButton id={id} isFollowing={isFollowing} />
                             )}

@@ -3,8 +3,6 @@ import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
 import NotifiPresenter from "./NotifiPresenter";
 
-
-
 const ME = gql`
     query {
         me {
