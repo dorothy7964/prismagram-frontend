@@ -74,6 +74,15 @@ const Buttons = styled.div`
     margin-bottom: 10px;
 `;
 
+const DetailButton = styled(Button)`
+    display: block;
+    margin-top: 10px;
+`;
+
+const Text = styled.div`
+    color: ${props => props.theme.darkGreyColor};
+`;
+
 const Caption = styled.div`
     margin: 10px 0px;
 `;
@@ -82,6 +91,8 @@ const Comments = styled.ul`
     word-wrap: break-word;
     margin-top: 10px;
     line-height: 17px;
+    height: 53px
+    overflow: hidden;
 `;
 
 const Comment = styled.li`
@@ -128,6 +139,7 @@ export default ({
     currentItem,
     isLiked,
     likeCount,
+    commentCount,
     toggleLike,
     comments,
     newComment,
@@ -161,6 +173,9 @@ export default ({
                 </Button>
             </Buttons>
             <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
+            <DetailButton>
+                <Text>{commentCount > 2 ? `댓글 ${commentCount}개 모두 보기` : ""}</Text>
+            </DetailButton>
             <Caption>
                 <FatText text={userName} /> {caption}
             </Caption>

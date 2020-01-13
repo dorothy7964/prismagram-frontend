@@ -15,6 +15,7 @@ const PostContainer = ({
     files,
     isLiked,
     likeCount,
+    commentCount,
     comments,
     createdAt
 }) => {
@@ -23,13 +24,13 @@ const PostContainer = ({
     const [currentItem, setCurrentItem] = useState(0);
     const [isLikedS, setIsLiked] = useState(isLiked);
     const [likeCountS, setLikeCount] = useState(likeCount);
+    const [commentCountS, setCommentCount] = useState(commentCount);
     const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
         variables: { postId: id }
     });
     const [addCommentMutation] = useMutation(ADD_COMMENT, {
         variables: { postId: id, text: comment.value }
     });
-
     
     const slide = () => {
         const totalFiles = files.length;
@@ -80,6 +81,7 @@ const PostContainer = ({
             currentItem={currentItem}
             isLiked={isLikedS}
             likeCount={likeCountS}
+            commentCount={commentCountS}
             toggleLike={toggleLike}
             comments={comments}
             newComment={comment}

@@ -23,6 +23,7 @@ const FEED_QUERY = gql`
             }
             isLiked
             likeCount
+            commentCount
             comments {
                 id
                 text
@@ -65,6 +66,7 @@ export default () => {
                     files={post.files}
                     isLiked={post.isLiked}
                     likeCount={post.likeCount}
+                    commentCount={post.commentCount}
                     comments={post.comments}
                     createdAt={post.createdAt}
                 />
