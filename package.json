@@ -12,8 +12,10 @@
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-slick": "^0.25.2",
     "react-textarea-autosize": "^7.1.0",
     "react-toastify": "^5.3.2",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^4.3.2",
     "styled-reset": "^4.0.0"
   },
