@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { useMutation } from "react-apollo-hooks";
 import useInput from "../../Hooks/useInput";
-import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
-import PostPresenter from "./PostPresenter";
+import { TOGGLE_LIKE, ADD_COMMENT } from "./FullPostQueries";
+import FullPostPresenter from "./FullPostPresenter";
 
 
-const PostContainer = ({
+const FullPostContainer = ({
     id,
     location,
     caption,
@@ -15,7 +15,6 @@ const PostContainer = ({
     files,
     isLiked,
     likeCount,
-    commentCount,
     comments,
     createdAt
 }) => {
@@ -24,7 +23,6 @@ const PostContainer = ({
     const [currentItem, setCurrentItem] = useState(0);
     const [isLikedS, setIsLiked] = useState(isLiked);
     const [likeCountS, setLikeCount] = useState(likeCount);
-    const [commentCountS, setCommentCount] = useState(commentCount);
     const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
         variables: { postId: id }
     });
@@ -32,18 +30,23 @@ const PostContainer = ({
         variables: { postId: id, text: comment.value }
     });
     
-    const slide = () => {
+    const slideNext = () => {
         const totalFiles = files.length;
         if (currentItem === totalFiles - 1) {
-            setTimeout(() => setCurrentItem(0), 3000);
+            setCurrentItem(0);
         } else {
-            setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+            setCurrentItem(currentItem + 1);
         }
     };
 
-    useEffect(() => {
-        slide();
-    });
+    const slidePrev = () => {
+        const totalFiles = files.length;
+        if (currentItem === 0) {
+            setCurrentItem(totalFiles - 1);
+        } else {
+            setCurrentItem(currentItem - 1);
+        }
+    };
 
     const toggleLike = () => {
         toggleLikeMutation();
@@ -73,16 +76,15 @@ const PostContainer = ({
     };
 
     return (
-        <PostPresenter 
-            id={id}
+        <FullPostPresenter 
             location={location}
             caption={caption}
             user={user}
             files={files}
             currentItem={currentItem}
+            slideNext={slideNext}
+            slidePrev={slidePrev}
             isLiked={isLikedS}
-            likeCount={likeCountS}
-            commentCount={commentCountS}
             toggleLike={toggleLike}
             comments={comments}
             newComment={comment}
@@ -93,7 +95,7 @@ const PostContainer = ({
     );
 };
 
-PostContainer.propTypes = {
+FullPostContainer.propTypes = {
     id: PropTypes.string.isRequired,
     location: PropTypes.string,
     caption: PropTypes.string.isRequired,
@@ -123,4 +125,4 @@ PostContainer.propTypes = {
     createdAt: PropTypes.string.isRequired
 };
 
-export default PostContainer;
+export default FullPostContainer;

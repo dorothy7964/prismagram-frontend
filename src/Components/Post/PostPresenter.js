@@ -77,9 +77,6 @@ const Buttons = styled.div`
 const DetailButton = styled(Button)`
     display: block;
     margin-top: 10px;
-`;
-
-const Text = styled.div`
     color: ${props => props.theme.darkGreyColor};
 `;
 
@@ -132,6 +129,7 @@ const Textarea = styled(TextareaAutosize)`
 `;
 
 export default ({
+    id,
     location,
     caption,
     user: { userName, avatar },
@@ -169,12 +167,16 @@ export default ({
                     {isLiked? <HeartFull /> : <HeartEmpty />}
                 </Button>
                 <Button>
-                    <CommentIcon />
+                    <Link to={`/FullFeed/${id}`}>
+                        <CommentIcon />
+                    </Link>
                 </Button>
             </Buttons>
             <FatText text={likeCount === 1 ? "1 like" : `${likeCount} likes`} />
             <DetailButton>
-                <Text>{commentCount > 2 ? `댓글 ${commentCount}개 모두 보기` : ""}</Text>
+                <Link to={`/FullFeed/${id}`}>
+                    {commentCount > 2 ? `댓글 ${commentCount}개 모두 보기` : ""}
+                </Link>
             </DetailButton>
             <Caption>
                 <FatText text={userName} /> {caption}

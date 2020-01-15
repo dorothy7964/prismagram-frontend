@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { HeartFull, CommentFull } from "./Icons";
@@ -17,7 +18,7 @@ const Overlay = styled.div`
     }
 `;
 
-const Container = styled.div`
+const Container = styled(Link)`
     user-select: none;
     background-image: url(${props => props.bg});
     background-size: cover;
@@ -43,9 +44,9 @@ const NumberText = styled.span`
     font-size: 16px;
 `;
 
-const SquarePost = ({ file, likeCount, commentCount }) => {
+const SquarePost = ({ id, file, likeCount, commentCount }) => {
     return (
-        <Container bg={file.url}>
+        <Container to={`/FullFeed/${id}`} bg={file.url} >
             <Overlay>
                 <Number>
                     <HeartFull />
@@ -61,6 +62,7 @@ const SquarePost = ({ file, likeCount, commentCount }) => {
 };
 
 SquarePost.propTypes = {
+    id: PropTypes.string.isRequired,
     file: PropTypes.object.isRequired,
     likeCount: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired

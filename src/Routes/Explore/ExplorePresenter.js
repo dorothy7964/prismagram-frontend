@@ -115,6 +115,7 @@ export default ({ data, loading }) => {
                             data.randomPost.map(post => (
                                 <SquarePost 
                                     key={post.id}
+                                    id={post.id}
                                     file={post.files[0]}
                                     likeCount={post.likeCount}
                                     commentCount={post.commentCount}
