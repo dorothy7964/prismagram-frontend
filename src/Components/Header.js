@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
-import { ME } from "../SharedQueries";
 import useInput from "../Hooks/useInput";
 import Input from "./Input";
 import { Logo, Compass, HeartEmpty, User } from "./Icons";
@@ -61,6 +61,14 @@ const SearchInput = styled(Input)`
 const HeaderLink = styled(Link)`
     &:not(:last-child) {
         margin-right: 30px;
+    }
+`;
+
+const ME = gql`
+    {
+        me {
+            userName
+        }
     }
 `;
 
