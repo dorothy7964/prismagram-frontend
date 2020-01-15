@@ -1,7 +1,8 @@
 import React from "react";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import ProfilePresenter from "./ProfilePresenter";
-import { GET_USER, LOG_OUT } from "./ProfileQueries";
+import { LOG_OUT} from "./ProfileQueries";
+import { GET_USER } from "../../SharedQueries";
 
 export default ({ match: { params: { userName } } }) => {
     const { data, loading } = useQuery(GET_USER, {

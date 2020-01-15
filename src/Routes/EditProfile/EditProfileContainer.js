@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
 import EditProfilePresenter from "./EditProfilePresenter";
-import { GET_USER, EDIT_PROFILE } from "./EditProfileQueries";
+import { EDIT_PROFILE } from "./EditProfileQueries";
+import { GET_USER } from "../../SharedQueries";
 
 export default ({ match: { params: { editUser} } }) => {
     const [action, setAction] = useState("view");
