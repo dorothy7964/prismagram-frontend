@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
 import { useQuery, useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
 import EditProfilePresenter from "./EditProfilePresenter";
 import { GET_USER, EDIT_PROFILE } from "./EditProfileQueries";
 
-export default withRouter(({ match: { params: { editUser} } }) => {
+export default ({ match: { params: { editUser} } }) => {
     const [action, setAction] = useState("view");
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -63,5 +62,5 @@ export default withRouter(({ match: { params: { editUser} } }) => {
             action={action}
         />
     );
-});
+};
 

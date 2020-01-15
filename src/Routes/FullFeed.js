@@ -45,8 +45,7 @@ const Wrapper = styled.div`
     min-height: 80vh;
 `;
 
-export default ({ location: { pathname } }) => {
-    const id = pathname.split("/")[2];
+export default ({ match: { params: { id } }}) => {
     const { data, loading } = useQuery(FULLFEED_QUERY, {
         variables: {
             id
