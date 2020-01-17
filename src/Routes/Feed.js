@@ -1,8 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import { gql } from "apollo-boost";
-import { useQuery } from "react-apollo-hooks";
+import { gql, useQuery } from '@apollo/client';
 import Loader from "../Components/Loader";
 import Post from "../Components/Post";
 
@@ -46,7 +45,9 @@ const Wrapper = styled.div`
 `;
 
 export default () => {
-    const { data, loading } = useQuery(FEED_QUERY);
+    const { data, loading } = useQuery(FEED_QUERY,{
+        fetchPolicy: "cache-and-network"
+    });
     return (
         <Wrapper>
             <Helmet>

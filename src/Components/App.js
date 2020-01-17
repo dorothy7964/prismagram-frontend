@@ -1,8 +1,7 @@
 import React from "react";
 import Helmet from 'react-helmet';
 import { HashRouter as Router } from "react-router-dom";
-import { gql } from "apollo-boost";
-import { useQuery } from "react-apollo-hooks";
+import { gql, useQuery } from '@apollo/client';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "slick-carousel/slick/slick.css";
@@ -16,7 +15,7 @@ import Header from "./Header";
 
 const QUERY = gql`
   {
-    isLoggedIn @client
+    isLoggedIn @client(always: true)
   }
 `;
 
