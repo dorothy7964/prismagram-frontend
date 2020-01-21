@@ -199,21 +199,21 @@ export default ({
                 </Caption>
                 {comments && (
                     <Comments>
-                        {comments.map(comment => (
-                            <Comment key={comment.id}>
-                                <FatText text={comment.user.userName} />
-                                {comment.text}
-                                <TimeForm>
-                                    <TimeIapse createAt={comment.createdAt} />
-                                </TimeForm>
-                            </Comment>
-                        ))}
                         {selfComments.map(comment => (
                             <Comment key={comment.id}>
                                 <FatText text={comment.user.userName} />
                                 {comment.text}
                                 <TimeForm>
                                     <TimeIapse createAt={moment().format("YYYY-MM-DDTHH:mm:ssZ")} />
+                                </TimeForm>
+                            </Comment>
+                        ))}
+                        {comments.map(comment => (
+                            <Comment key={comment.id}>
+                                <FatText text={comment.user.userName} />
+                                {comment.text}
+                                <TimeForm>
+                                    <TimeIapse createAt={comment.createdAt} />
                                 </TimeForm>
                             </Comment>
                         ))}

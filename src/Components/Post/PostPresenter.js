@@ -183,15 +183,6 @@ export default ({
             </Caption>
             {comments && (
                 <Comments>
-                    {comments.map(comment => (
-                        <Comment key={comment.id}>
-                            <FatText text={comment.user.userName} />
-                            {comment.text}
-                            <TimeForm>
-                                <TimeIapse createAt={comment.createdAt} />
-                            </TimeForm>
-                        </Comment>
-                    ))}
                     {selfComments.map(comment => (
                         <Comment key={comment.id}>
                             <FatText text={comment.user.userName} />
@@ -201,9 +192,17 @@ export default ({
                             </TimeForm>
                         </Comment>
                     ))}
+                    {comments.map(comment => (
+                        <Comment key={comment.id}>
+                            <FatText text={comment.user.userName} />
+                            {comment.text}
+                            <TimeForm>
+                                <TimeIapse createAt={comment.createdAt} />
+                            </TimeForm>
+                        </Comment>
+                    ))}
                 </Comments>
             )}
-
             <Timestamp>{ moment(createdAt).format("YYYY.MM.DD HH:MM") }</Timestamp>
             <Textarea 
                 placeholder={"Add a comment..."}  
