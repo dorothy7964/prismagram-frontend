@@ -143,7 +143,8 @@ export default ({
     newComment,
     selfComments,
     onKeyPress,
-    createdAt
+    createdAt,
+    loading
 }) => (
     <Post>
         <Header>
@@ -205,10 +206,11 @@ export default ({
             )}
             <Timestamp>{ moment(createdAt).format("YYYY.MM.DD HH:MM") }</Timestamp>
             <Textarea 
-                placeholder={"Add a comment..."}  
+                placeholder={loading ? "Writing comment" : "Please write a comment"}
                 value={newComment.value} 
                 onChange={newComment.onChange} 
                 onKeyPress={onKeyPress}
+                disabled={loading}
             />
         </Meta>
     </Post>

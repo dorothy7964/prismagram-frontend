@@ -20,6 +20,7 @@ const PostContainer = ({
     createdAt
 }) => {
     const comment = useInput("");
+    const [loading, setLoading] = useState(false);
     const [selfComments, setSelfComments] = useState([]);
     const [currentItem, setCurrentItem] = useState(0);
     const [isLikedS, setIsLiked] = useState(isLiked);
@@ -61,13 +62,17 @@ const PostContainer = ({
         if(which === 13){
             e.preventDefault();
             try {
+                setLoading(true);
+                comment.setValue("");
                 const {
                     data: { addComment } 
                 } = await addCommentMutation();
                 setSelfComments([...selfComments, addComment]);
-                comment.setValue("");
             }catch {
+                console.log(e);
                 toast.error("Cant send comment");
+            }finally {
+                setLoading(false);
             }
        }
     };
@@ -89,6 +94,7 @@ const PostContainer = ({
             selfComments={selfComments}
             onKeyPress={onKeyPress}
             createdAt={createdAt}
+            loading={loading}
         />
     );
 };
