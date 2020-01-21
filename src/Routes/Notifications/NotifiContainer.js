@@ -1,24 +1,13 @@
 import React from "react";
-import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
 import NotifiPresenter from "./NotifiPresenter";
-
-const ME = gql`
-    query {
-        me {
-            followers {
-                    id
-                    userName
-                    avatar
-                    isFollowing
-                }
-            }
-        }
-`;
+import { ME } from "./NotificationsQueries";
 
 export default () => {
-    const { data, loading } = useQuery(ME);
-
+    const { data, loading } = useQuery(ME, {
+        fetchPolicy: "cache-and-network"
+    });
+    
     return <NotifiPresenter data={data} loading={loading} />
 };
 

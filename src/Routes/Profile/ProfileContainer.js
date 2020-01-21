@@ -6,7 +6,8 @@ import { GET_USER } from "../../SharedQueries";
 
 export default ({ match: { params: { userName } } }) => {
     const { data, loading } = useQuery(GET_USER, {
-        variables: { userName }
+        variables: { userName },
+        fetchPolicy: "cache-and-network"
     });
     const [logOut] = useMutation(LOG_OUT);
     

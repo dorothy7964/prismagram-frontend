@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -24,6 +24,9 @@ const CardLink = styled(Link)`
 `;
 
 const UserCard = ({ id, url, userName, isFollowing, isSelf }) => {
+    useEffect(() => {
+        console.log("UserCard");
+    }, []);
     return (
         <Card>
             <CardAvatar size={"md"} url={url} />

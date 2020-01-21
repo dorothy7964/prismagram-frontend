@@ -27,12 +27,8 @@ cache.writeData({
     },
 });
 
-const client =  new ApolloClient({
+export default new ApolloClient({
     link: authLink.concat(httpLink),
     cache,
     resolvers
 });
-
-    
-export default client;
-

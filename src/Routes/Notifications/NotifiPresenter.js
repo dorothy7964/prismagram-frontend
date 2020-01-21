@@ -30,10 +30,9 @@ export default ({ data, loading }) => {
         );
     }else if(!loading && data && data.me) {
         const {
-            me: {
-                followers
-            }
-        } = data;
+            me: { followers }
+        } = data;        
+        
         return (
             <Wrapper>
                 <Helmet>

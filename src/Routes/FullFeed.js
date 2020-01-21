@@ -47,9 +47,7 @@ const Wrapper = styled.div`
 
 export default ({ match: { params: { id } }}) => {
     const { data, loading } = useQuery(FULLFEED_QUERY, {
-        variables: {
-            id
-        }
+        variables: { id } 
     });
     
     return (

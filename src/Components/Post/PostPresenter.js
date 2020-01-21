@@ -88,7 +88,7 @@ const Comments = styled.ul`
     word-wrap: break-word;
     margin-top: 10px;
     line-height: 17px;
-    height: 53px
+    height: 52px
     overflow: hidden;
 `;
 

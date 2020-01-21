@@ -13,7 +13,8 @@ export default ({ match: { params: { editUser} } }) => {
     const [lastName, setLastName] = useState("");
     const [bio, setBio] = useState("");
     const { data, loading } = useQuery(GET_USER, {
-        variables: { userName : editUser }
+        variables: { userName : editUser },
+        fetchPolicy: "cache-and-network"
     });
     const [editUserMutation] = useMutation(EDIT_PROFILE, {
         variables: {
