@@ -119,7 +119,7 @@ const Comments = styled.ul`
     margin-top: 10px;
     padding-right: 17px;
     line-height: 17px;
-    height: 300px
+    height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
 `;

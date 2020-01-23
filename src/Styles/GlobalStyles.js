@@ -13,6 +13,11 @@ export default createGlobalStyle`
         font-size:14px;
         font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         padding-top: 140px;
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
     }
     a {
         color:${props => props.theme.blueColor};
@@ -22,7 +27,7 @@ export default createGlobalStyle`
         outline:none;
     }
     
-    /* Internet Explorer용 코드 */
+    * Internet Explorer용 코드 스크롤 바  */
     html {scrollbar-3dLight-Color: #efefef; scrollbar-arrow-color: #dfdfdf; scrollbar-base-color: #efefef; scrollbar-Face-Color: #dfdfdf; scrollbar-Track-Color: #efefef; scrollbar-DarkShadow-Color: #efefef; scrollbar-Highlight-Color: #efefef; scrollbar-Shadow-Color: #efefef}
     
     /* Chrome, Safari용 스크롤 바 */
