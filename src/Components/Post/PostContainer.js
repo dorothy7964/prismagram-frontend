@@ -6,7 +6,6 @@ import useInput from "../../Hooks/useInput";
 import { TOGGLE_LIKE, ADD_COMMENT } from "../../SharedQueries";
 import PostPresenter from "./PostPresenter";
 
-
 const PostContainer = ({
     id,
     location,

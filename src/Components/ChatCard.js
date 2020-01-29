@@ -7,16 +7,13 @@ import Avatar from "./Avatar";
 import FatText from './FatText';
 import TimeIapse from "./TimeIapse";
 
-const Card = styled.button`
-    ${props => props.theme.whiteBox_bottom}
+const Card = styled(Link)`
+    color: inherit;
     display: flex;
     flex-direction: row;
-    align-items: center;
     padding: 15px;
     width: 100%;
     cursor: pointer;
-    border: 0;
-    outline: none;
     user-select: none
     &:hover {
         background-color: ${props => props.theme.bgColor}
@@ -33,12 +30,8 @@ const CardMiddle = styled.div`
     padding: 0 15px;
 `;
 
-const CardLink = styled(Link)`
-    color: inherit;
-    margin-bottom: 10px;
-`;
-
 const Message = styled.div`
+    margin-top: 10px;
     width: 260px;
     color: inherit;
     overflow: hidden;
@@ -48,6 +41,9 @@ const Message = styled.div`
 `;
 
 const CardLast = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 `;
 
 const TimeForm = styled.div`
@@ -67,19 +63,29 @@ const ChatCount = styled.div`
     font-weight:bold;
 `;
 
-const ChatCard = () => {
+const ChatCard = ({ id, participants, messages, me }) => {
+    participants = participants.filter(participant => participant.id !== me.id);
+    const avatar = participants[0].avatar;
+    const userName = participants[0].userName;
+    // 마지막 메시지 텍스트
+    const mesgeIen = messages.length;
+    const lastArray = mesgeIen - 1;
+    const lastMeg = messages[lastArray].text;
+    const lastCreatedAt = messages[lastArray].createdAt;
+    // 마지막 메시지 시간
+    const lastTime = messages[lastArray].createdAt;
+    console.log(lastTime);
+
     return (
-        <Card>
-            <CardAvatar size={"md"} url="https://t1.daumcdn.net/qna/image/1542632018000000528" />
+        <Card to={`/chat/${id}`}>
+            <CardAvatar size={"md"} url={avatar} />
             <CardMiddle>
-                <CardLink to={`/Hyuna`}>
-                    <FatText text="유저이름" />
-                </CardLink>
-                <Message>대화내용</Message>
+                <FatText text={userName} />
+                <Message>{lastMeg}</Message>
             </CardMiddle>
             <CardLast>
                 <TimeForm>
-                    <TimeIapse createAt={moment().format("YYYY-MM-DDTHH:mm:ssZ")} />
+                    <TimeIapse createAt={lastCreatedAt} />
                 </TimeForm>
                 <ChatCount>20</ChatCount>
             </CardLast>

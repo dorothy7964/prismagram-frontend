@@ -5,7 +5,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
 import useInput from "../Hooks/useInput";
 import Input from "./Input";
-import { Logo, Compass, HeartEmpty, User } from "./Icons";
+import { Logo, Compass, HeartEmpty, User, Send } from "./Icons";
 
 
 const Header = styled.header`
@@ -112,6 +112,9 @@ export default withRouter(({ history }) => {
                             <User />
                         </HeaderLink>
                     )} 
+                    <HeaderLink to="/chat">
+                        <Send />
+                    </HeaderLink>
                 </HeaderColumn>
             </HeaderWrapper>
         </Header>

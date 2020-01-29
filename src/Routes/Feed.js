@@ -79,7 +79,6 @@ export default () => {
                 items
             },
             updateQuery: (prev, { fetchMoreResult }) => {
-                console.log('prev', fetchMoreResult);
                 if (!fetchMoreResult) {
                     setHasMore(false);
                     return prev;
