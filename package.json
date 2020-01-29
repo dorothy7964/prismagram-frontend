@@ -11,6 +11,7 @@
     "apollo-client": "^2.6.8",
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
+    "apollo-link-ws": "^1.0.19",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "moment": "^2.24.0",
@@ -27,7 +28,8 @@
     "react-toastify": "^5.3.2",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.3.2",
-    "styled-reset": "^4.0.0"
+    "styled-reset": "^4.0.0",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "scripts": {
     "start": "react-scripts start",

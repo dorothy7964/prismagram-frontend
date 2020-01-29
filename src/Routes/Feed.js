@@ -73,7 +73,6 @@ export default () => {
     });
     
     const onLoadMore = () => {
-        console.log(data.paginateFeed.length);
         fetchMore({
             variables: {
                 pageNumber: data.paginateFeed.length,
@@ -82,7 +81,6 @@ export default () => {
             updateQuery: (prev, { fetchMoreResult }) => {
                 console.log('prev', fetchMoreResult);
                 if (!fetchMoreResult) {
-                    console.log("false")
                     setHasMore(false);
                     return prev;
                 }
