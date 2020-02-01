@@ -1,9 +1,12 @@
 import { gql } from '@apollo/client';
 
-export const SEEROOMS_QUERY = gql`
+export const ROOMS_QUERY = gql`
     {
         seeRooms {
             id
+            lastMessage
+            lastMsgTime
+            unReadMsgCounter
             participants {
                 id
                 userName
@@ -13,7 +16,6 @@ export const SEEROOMS_QUERY = gql`
                 id
                 text
                 createdAt
-                updatedAt
             }
         }
         me {

@@ -63,37 +63,52 @@ const ChatCount = styled.div`
     font-weight:bold;
 `;
 
-const ChatCard = ({ id, participants, messages, me }) => {
+const ChatCard = ({
+    id, 
+    participants, 
+    unReadMsgCounter, 
+    lastMessage,
+    lastMsgTime, 
+    me 
+}) => {
     participants = participants.filter(participant => participant.id !== me.id);
     const avatar = participants[0].avatar;
     const userName = participants[0].userName;
-    // 마지막 메시지 텍스트
-    const mesgeIen = messages.length;
-    const lastArray = mesgeIen - 1;
-    const lastMeg = messages[lastArray].text;
-    const lastCreatedAt = messages[lastArray].createdAt;
-    // 마지막 메시지 시간
-    const lastTime = messages[lastArray].createdAt;
-    console.log(lastTime);
-
+    
     return (
         <Card to={`/chat/${id}`}>
             <CardAvatar size={"md"} url={avatar} />
             <CardMiddle>
                 <FatText text={userName} />
-                <Message>{lastMeg}</Message>
+                <Message>{lastMessage}</Message>
             </CardMiddle>
             <CardLast>
                 <TimeForm>
-                    <TimeIapse createAt={lastCreatedAt} />
+                    <TimeIapse createAt={lastMsgTime} />
                 </TimeForm>
-                <ChatCount>20</ChatCount>
+                <ChatCount>
+                    {unReadMsgCounter === 0 ? "" : unReadMsgCounter }
+                </ChatCount>
             </CardLast>
         </Card>
     );
 };
 
 ChatCard.propTypes = {
+    id: PropTypes.string.isRequired,
+    participants: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            avatar: PropTypes.string,
+            userName: PropTypes.string.isRequired
+        })
+    ).isRequired,
+    unReadMsgCounter: PropTypes.number.isRequired,
+    lastMessage: PropTypes.string,
+    lastMsgTime: PropTypes.string,
+    me: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+    }).isRequired
 };
 
 export default ChatCard;

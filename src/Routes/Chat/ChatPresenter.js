@@ -38,7 +38,9 @@ export default ({ data, loading }) => {
                             key={room.id}
                             id={room.id}
                             participants={room.participants}
-                            messages={room.messages}
+                            lastMessage={room.lastMessage}
+                            lastMsgTime={room.lastMsgTime}
+                            unReadMsgCounter={room.unReadMsgCounter}
                             me={data.me}
                         />
                     ))}
