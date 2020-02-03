@@ -24,3 +24,8 @@ export const ROOMS_QUERY = gql`
     }
 `;
 
+export const READCOUNT_MESSAGE = gql`
+    mutation readcountMessage($roomId: String!){
+        readcountMessage(roomId: $roomId)
+    }
+`;

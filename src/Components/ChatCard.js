@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import moment from "moment";
 import Avatar from "./Avatar";
 import FatText from './FatText';
 import TimeIapse from "./TimeIapse";
 
-const Card = styled(Link)`
+const Card = styled.button`
     color: inherit;
     display: flex;
     flex-direction: row;
     padding: 15px;
     width: 100%;
+    border: 0;
+    outline: none;
     cursor: pointer;
     user-select: none
+    background-color: #fff;
     &:hover {
         background-color: ${props => props.theme.bgColor}
     }
@@ -69,14 +70,15 @@ const ChatCard = ({
     unReadMsgCounter, 
     lastMessage,
     lastMsgTime, 
-    me 
+    me,
+    handleEnterRoom
 }) => {
     participants = participants.filter(participant => participant.id !== me.id);
     const avatar = participants[0].avatar;
     const userName = participants[0].userName;
     
     return (
-        <Card to={`/chat/${id}`}>
+        <Card onClick={() => handleEnterRoom(id)}>
             <CardAvatar size={"md"} url={avatar} />
             <CardMiddle>
                 <FatText text={userName} />

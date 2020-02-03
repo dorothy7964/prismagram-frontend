@@ -19,7 +19,7 @@ const Chat = styled.div`
     overflow-y: scroll;
 `;
 
-export default ({ data, loading }) => {
+export default ({ data, loading, handleEnterRoom }) => {
     if(loading === true){
         return (
             <Wrapper>
@@ -42,6 +42,7 @@ export default ({ data, loading }) => {
                             lastMsgTime={room.lastMsgTime}
                             unReadMsgCounter={room.unReadMsgCounter}
                             me={data.me}
+                            handleEnterRoom={handleEnterRoom}
                         />
                     ))}
                 </Chat>
