@@ -1,10 +1,10 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import moment from "moment";
 import TextareaAutosize from "react-textarea-autosize";
 import { Link } from "react-router-dom";
 import { Send } from "../../Components/Icons";
+import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
 import FatText from '../../Components/FatText';
 import TimeIapse from "../../Components/TimeIapse";
@@ -100,47 +100,71 @@ const SendButton = styled.span`
     cursor: pointer;
 `;
 
-export default () => (
-    <Wrapper>
-        <Helmet>
-            <title>Chat | Prismagram</title>
-        </Helmet>
-        <ChatWrapper>
-            <ChatTop>
-                <CardAvatar size={"sm"} url="https://t1.daumcdn.net/qna/image/1542632018000000528" />
-                <CardLink to={`/Hyuna`}>
-                    <FatText text="유저이름" />
-                </CardLink>
-            </ChatTop>
-            <ChatContents>
-                <MessageContainer>
-                    <CardAvatar size={"sm"} url="https://t1.daumcdn.net/qna/image/1542632018000000528" />
-                    <ColumBox>
-                        <MessageBubble bg={'#FF'}>
-                            메세지 내용
-                        </MessageBubble>
-                    </ColumBox>
-                    <TimeForm>
-                        <TimeIapse createAt={moment().format("YYYY-MM-DDTHH:mm:ssZ")} />
-                    </TimeForm>
-                </MessageContainer>
-                <MessageContainer style={{ justifyContent: 'flex-end' }}>
-                    <ColumBox>
-                        <MessageBubble bg={'#FFE404'}>
-                            메세지 내용
-                        </MessageBubble>
-                    </ColumBox>
-                    <TimeForm style={{ marginRight: '3px' }}>
-                        <TimeIapse createAt={moment().format("YYYY-MM-DDTHH:mm:ssZ")} />
-                    </TimeForm>
-                </MessageContainer>
-            </ChatContents>
-            <ChatLast>
-                <Textarea />
-                <SendButton>
-                    <Send color="#3897f0" />
-                </SendButton>
-            </ChatLast>
-        </ChatWrapper>
-    </Wrapper>
-);
+export default ({ data, loading }) => {
+    if(loading === true){
+        return (
+            <Wrapper>
+                <Loader />
+            </Wrapper>
+        );
+    }else if(!loading && data && data.seeRoom){
+        const me = data.me.id;
+        const { messages } = data.seeRoom;
+        const { participants } = data.seeRoom;
+        const toUser = participants.filter(participant => participant.id !== me);
+        const toUserName =  toUser[0].userName;
+        const toUserAvatar =  toUser[0].avatar;
+
+        return (
+            <Wrapper>
+                <Helmet>
+                    <title>ChatRoom | Prismagram</title>
+                </Helmet>
+                <ChatWrapper>
+                    <ChatTop>
+                        <CardAvatar size={"sm"} url={toUserAvatar} />
+                        <CardLink to={`/${toUserName}`}>
+                            <FatText text={toUserName} />
+                        </CardLink>
+                    </ChatTop>
+                    <ChatContents>
+                        {messages.length === 0 ? "" : (
+                            messages.map(message =>
+                                (message.from.id !== me) ? (
+                                    <MessageContainer key={message.id} >
+                                        <CardAvatar size={"sm"} url={message.from.avatar} />
+                                        <ColumBox>
+                                            <MessageBubble bg={'#FF'}>
+                                                {message.text}
+                                            </MessageBubble>
+                                        </ColumBox>
+                                        <TimeForm>
+                                            <TimeIapse createAt={message.createdAt} />
+                                        </TimeForm>
+                                    </MessageContainer>
+                                 ): (
+                                     <MessageContainer key={message.id} style={{ justifyContent: 'flex-end' }}>
+                                        <TimeForm style={{ marginRight: '3px' }}>
+                                            <TimeIapse createAt={message.createdAt} />
+                                        </TimeForm>   
+                                         <ColumBox>
+                                            <MessageBubble bg={'#FFE404'}>
+                                                {message.text}
+                                            </MessageBubble>
+                                        </ColumBox>
+                                    </MessageContainer>
+                                )
+                            )
+                        )}
+                    </ChatContents>
+                    <ChatLast>
+                        <Textarea />
+                        <SendButton>
+                            <Send color="#3897f0" />
+                        </SendButton>
+                    </ChatLast>
+                </ChatWrapper>
+            </Wrapper>
+        );
+    }
+};

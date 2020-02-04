@@ -6,12 +6,8 @@ import ChatPresenter from "./ChatPresenter";
 export default ({ history }) => {
     const { data, loading, refetch } = useQuery(ROOMS_QUERY);
     const [readcountMsgMutation] = useMutation(READCOUNT_MESSAGE);
-    
 
     const handleEnterRoom = async (id)=>{
-        console.log("handleEnterRoom");
-        console.log(id);
-
         try {
             const { data } = await readcountMsgMutation({
                 refetchQueries:() => [{
@@ -23,7 +19,6 @@ export default ({ history }) => {
                 }
             }); 
             if(data.readcountMessage){
-                console.log("readcountMessage", data.readcountMessage);
                 history.push(`/chat/${id}`);
             }
 
@@ -34,7 +29,6 @@ export default ({ history }) => {
     }
 
     useEffect(() => {
-        console.log("ChatContainer");
         refetch();
     }, []);
 

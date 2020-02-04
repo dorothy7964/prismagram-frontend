@@ -1,3 +1,4 @@
+/// // client.js 에서 cache.writeData 처리했다.
 // export const defaults = {
 //     isLoggedIn: Boolean(localStorage.getItem("token")) || false
 // };
