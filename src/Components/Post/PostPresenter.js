@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import TextareaAutosize from "react-textarea-autosize";
 import moment from "moment";
-import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
+import { HeartFull, HeartEmpty, Comment as CommentIcon, Send } from "../Icons";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
 import TimeIapse from "../TimeIapse";
@@ -67,7 +67,7 @@ const Button = styled.span`
 
 const Buttons = styled.div`
     ${Button} {
-        &:first-child {
+        &:not(:last-child) {
             margin-right: 10px;
         }
     }
@@ -126,6 +126,9 @@ const Textarea = styled(TextareaAutosize)`
     &:focus {
         outline: none;
     }
+    &:disabled {
+        background-color: #fff;
+    }
 `;
 
 export default ({
@@ -170,6 +173,11 @@ export default ({
                 <Button>
                     <Link to={`/FullFeed/${id}`}>
                         <CommentIcon />
+                    </Link>
+                </Button>
+                <Button>
+                    <Link to={`/chat/${id}`}>
+                        <Send />
                     </Link>
                 </Button>
             </Buttons>

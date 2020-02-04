@@ -30,6 +30,27 @@ export const SEE_ROOM = gql`
     }
 `;
 
+export const SEND_MESSAGE = gql`
+    mutation sendMessage($roomId:String, $message:String!, $toId:String) {
+        sendMessage(roomId: $roomId message: $message toId: $toId) {
+            id
+            text
+            createdAt
+            from {
+                id
+                avatar
+                userName
+            }
+            to {
+                id
+            }
+            room {
+                id
+            }
+        }
+    }
+`;
+
 export const NEW_MESSAGE = gql`
     subscription newMessage($roomId: String!){
         newMessage(roomId: $roomId){

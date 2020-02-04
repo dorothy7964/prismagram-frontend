@@ -91,6 +91,9 @@ const Textarea = styled(TextareaAutosize)`
     &:focus {
         outline: none;
     }
+    &:disabled {
+        background-color: #fff;
+    }
 `;
 
 const SendButton = styled.span`
@@ -100,7 +103,14 @@ const SendButton = styled.span`
     cursor: pointer;
 `;
 
-export default ({ data, loading }) => {
+export default ({ 
+    data,
+    loading,
+    sendLoading,
+    newMessage,
+    onKeyPress,
+    onSubmit
+}) => {
     if(loading === true){
         return (
             <Wrapper>
@@ -158,9 +168,18 @@ export default ({ data, loading }) => {
                         )}
                     </ChatContents>
                     <ChatLast>
-                        <Textarea />
-                        <SendButton>
-                            <Send color="#3897f0" />
+                        <Textarea 
+                            value={newMessage.value} 
+                            onChange={newMessage.onChange} 
+                            onKeyPress={onKeyPress}
+                            disabled={sendLoading}
+                        />
+                        <SendButton onClick={onSubmit}>
+                            {sendLoading? (
+                                <Send color="#3897f0" />    
+                            ) : (
+                                <Send />    
+                            )}
                         </SendButton>
                     </ChatLast>
                 </ChatWrapper>
