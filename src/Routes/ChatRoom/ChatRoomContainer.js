@@ -39,14 +39,15 @@ export default ({ match: { params: { roomId } }}) => {
         updateQuery: (prev, { subscriptionData }) => {
             if (!subscriptionData.data) return prev;
             const newMessage = subscriptionData.data.newMessage;
-            console.log("newMessage >>> ",newMessage);
-            console.log("prev.me.id >>> ", prev.me.id);
             if(newMessage.to.id === prev.me.id ){
                 toast.success(`${newMessage.from.username}:${newMessage.text}`)
             }
             readcountMsgMutation();
-            prev.seeRoom.messages.push(newMessage);
-            return prev;
+            return Object.assign({}, prev, {
+                seeRoom: Object.assign({}, prev.seeRoom, {
+                    messages: [...prev.seeRoom.messages, newMessage],
+                })
+            });
         },
     });
 
@@ -76,7 +77,6 @@ export default ({ match: { params: { roomId } }}) => {
                 await readcountMsgMutation();
             } catch {
                 console.log(e);
-                toast.error("Cant send messageInput");
             } finally {
                 setSendLoading(false);
             }
