@@ -43,12 +43,16 @@ export default ({ match: { params: { roomId } }}) => {
                 toast.success(`${newMessage.from.username}:${newMessage.text}`)
             }
             readcountMsgMutation();
-            return Object.assign({}, prev, {
-                seeRoom: Object.assign({}, prev.seeRoom, {
-                    messages: [...prev.seeRoom.messages, newMessage],
-                })
-            });
-        },
+            if (!prev.seeRoom.messages.find((msg) => msg.id === newMessage.id)) {
+                return Object.assign({}, prev, {
+                    seeRoom: Object.assign({}, prev.seeRoom, {
+                        messages: [...prev.seeRoom.messages, newMessage],
+                    })
+                });
+            } else {
+                return prev;
+            }
+        }
     });
 
     const onSubmit = async e => {
