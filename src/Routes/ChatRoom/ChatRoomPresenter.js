@@ -109,8 +109,7 @@ export default ({
     sendLoading,
     newMessage,
     onKeyPress,
-    onSubmit,
-    chatLocation
+    onSubmit
 }) => {
     if(loading === true){
         return (
@@ -139,36 +138,34 @@ export default ({
                         </CardLink>
                     </ChatTop>
                     <ChatContents>
-                        <div ref={chatLocation} key={data.seeRoom.id}>
-                            {messages.length === 0 ? "" : (
-                                messages.map(message =>
-                                    (message.from.id !== me) ? (
-                                        <MessageContainer key={message.id} >
-                                            <CardAvatar size={"sm"} url={message.from.avatar} />
-                                            <ColumBox>
-                                                <MessageBubble bg={'#FF'}>
-                                                    {message.text}
-                                                </MessageBubble>
-                                            </ColumBox>
-                                            <TimeForm>
-                                                <TimeIapse createAt={message.createdAt} />
-                                            </TimeForm>
-                                        </MessageContainer>
-                                    ): (
-                                        <MessageContainer key={message.id} style={{ justifyContent: 'flex-end' }}>
-                                            <TimeForm style={{ marginRight: '3px' }}>
-                                                <TimeIapse createAt={message.createdAt} />
-                                            </TimeForm>   
-                                            <ColumBox>
-                                                <MessageBubble bg={'#FFE404'}>
-                                                    {message.text}
-                                                </MessageBubble>
-                                            </ColumBox>
-                                        </MessageContainer>
-                                    )
+                        {messages.length === 0 ? "" : (
+                            messages.map(message =>
+                                (message.from.id !== me) ? (
+                                    <MessageContainer key={message.id} >
+                                        <CardAvatar size={"sm"} url={message.from.avatar} />
+                                        <ColumBox>
+                                            <MessageBubble bg={'#FF'}>
+                                                {message.text}
+                                            </MessageBubble>
+                                        </ColumBox>
+                                        <TimeForm>
+                                            <TimeIapse createAt={message.createdAt} />
+                                        </TimeForm>
+                                    </MessageContainer>
+                                 ): (
+                                     <MessageContainer key={message.id} style={{ justifyContent: 'flex-end' }}>
+                                        <TimeForm style={{ marginRight: '3px' }}>
+                                            <TimeIapse createAt={message.createdAt} />
+                                        </TimeForm>   
+                                         <ColumBox>
+                                            <MessageBubble bg={'#FFE404'}>
+                                                {message.text}
+                                            </MessageBubble>
+                                        </ColumBox>
+                                    </MessageContainer>
                                 )
-                            )}
-                        </div>
+                            )
+                        )}
                     </ChatContents>
                     <ChatLast>
                         <Textarea 

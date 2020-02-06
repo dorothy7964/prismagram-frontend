@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import ChatCard from "../../Components/ChatCard";
+import SearchCard from "../../Components/SearchCard";
+import Input from "../../Components/Input";
 
 const Wrapper = styled.div`
     min-height: 70vh;
@@ -19,7 +21,32 @@ const Chat = styled.div`
     overflow-y: scroll;
 `;
 
-export default ({ data, loading, handleEnterRoom }) => {
+const Form = styled.form`
+    text-align: center;
+    padding: 20px 0;
+`;
+
+const SearchInput = styled(Input)`
+    background-color: ${props => props.theme.bgColor};
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    height: auto;
+    text-align: center;
+    width: 95%;
+    &::placeholder {
+        opacity: 0.8;
+        font-weight: 200;
+    }
+`;
+
+export default ({ 
+    data, 
+    loading, 
+    handleEnterRoom,
+    searchTerm,
+    onSubmit
+}) => {
     if(loading === true){
         return (
             <Wrapper>
@@ -33,6 +60,16 @@ export default ({ data, loading, handleEnterRoom }) => {
                     <title>Chat | Prismagram</title>
                 </Helmet>
                 <Chat>
+                    <Form onSubmit={onSubmit}>
+                        <SearchInput
+                            value={searchTerm.value}
+                            onChange={searchTerm.onChange}
+                            placeholder="채팅할 유저 검색"
+                        />
+                    </Form>    
+                    <SearchCard 
+                        term={searchTerm}
+                    />
                     {data.seeRooms.map(room => (
                         <ChatCard 
                             key={room.id}

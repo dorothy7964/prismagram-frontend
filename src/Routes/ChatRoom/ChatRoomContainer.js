@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from '@apollo/client';
 import { READCOUNT_MESSAGE } from "../Chat/ChatQueries";
@@ -8,7 +8,6 @@ import useInput from "../../Hooks/useInput";
 
 export default ({ match: { params: { roomId } }}) => {
     const messageInput = useInput("");
-    const chatLocation = useRef(null);
     const [sendLoading, setSendLoading] = useState(false);
     const { data, loading, subscribeToMore } = useQuery(SEE_ROOM, {
         variables: {
@@ -40,6 +39,9 @@ export default ({ match: { params: { roomId } }}) => {
         updateQuery: (prev, { subscriptionData }) => {
             if (!subscriptionData.data) return prev;
             const newMessage = subscriptionData.data.newMessage;
+            if(newMessage.to.id === prev.me.id ){
+                toast.success(`${newMessage.from.username}:${newMessage.text}`)
+            }
             readcountMsgMutation();
             if (!prev.seeRoom.messages.find((msg) => msg.id === newMessage.id)) {
                 return Object.assign({}, prev, {
@@ -85,19 +87,9 @@ export default ({ match: { params: { roomId } }}) => {
        }
     };
 
-    const scrollBottom = () => {
-        chatLocation.current.scrollIntoView({ block: 'end', behavior: 'smooth' })
-    }
-
     useEffect(() => {
         more();
     }, []);
-
-    useEffect(()=>{
-        if (!loading) {
-            scrollBottom();
-        }
-    }, [data])
 
     return (
         <ChatRoomPresenter 
@@ -107,7 +99,6 @@ export default ({ match: { params: { roomId } }}) => {
             newMessage={messageInput}
             onKeyPress={onKeyPress}
             onSubmit={onSubmit}
-            chatLocation={chatLocation}
         />
     );
 };

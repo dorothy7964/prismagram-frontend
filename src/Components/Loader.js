@@ -14,8 +14,8 @@ const Loader = styled.div`
     text-align: center;
 `;
 
-export default () => (
+export default ({size = 36}) => (
     <Loader>
-        <Logo size={36} />
+        <Logo size={size} />
     </Loader>
 );

@@ -1,4 +1,5 @@
-const BOX_BORDER = "1px solid #e6e6e6";
+const BORDER_COLOR = "#e6e6e6"
+const BOX_BORDER = `1px solid ${BORDER_COLOR}`;
 const BORDER_RADIUS = "4px";
 
 export default {
@@ -10,7 +11,8 @@ export default {
     redColor: "#ED4956",
     blueColor: "#3897f0",
     darkBlueColor: "#003569",
-    boxBorder: "1px solid #e6e6e6",
+    borderColor: `${BORDER_COLOR}`,
+    boxBorder: `1px solid ${BORDER_COLOR}`,
     borderRadius: "4px",
     whiteBox: `border:${BOX_BORDER};
                border-radius:${BORDER_RADIUS};

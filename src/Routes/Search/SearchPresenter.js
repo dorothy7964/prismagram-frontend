@@ -35,13 +35,13 @@ const SearchPresenter = ({ searchTerm, loading, data }) => {
                 <FatText text={"Search for something"} />
             </Wrapper>
         );
-    }else if(loading === true){
+    } else if(loading === true){
         return (
             <Wrapper>
                 <Loader />
             </Wrapper>
         );
-    }else if(data && data.searchUser && data.searchPost){
+    } else if(data && data.searchUser && data.searchPost){
         return(
             <Wrapper>
                 <Section>
