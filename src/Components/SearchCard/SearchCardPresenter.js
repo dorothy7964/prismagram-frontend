@@ -34,7 +34,7 @@ const CardButton = styled.button`
     font-weight: 600;
 `;
 
-const SearchCardPresenter = ({ data, loading }) => {
+const SearchCardPresenter = ({ data, loading, handleCreateRoom }) => {
     if(data === undefined){
         return null;
     } else if (loading === true){
@@ -59,7 +59,7 @@ const SearchCardPresenter = ({ data, loading }) => {
                         <Card key={user.id} >
                             <Avatar size={"sm"} url={user.avatar} />
                             <CardFatText text={user.userName} />
-                            <CardButton>채팅하러가기</CardButton>
+                            <CardButton onClick={() => handleCreateRoom(user.id)}>채팅하러가기</CardButton>
                         </Card>
                      ))}
                     </Wrapper>

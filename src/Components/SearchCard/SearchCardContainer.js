@@ -5,7 +5,7 @@ import SearchCardPresenter from "./SearchCardPresenter";
 import { SEARCH } from "./SearchCardQueries";
 
 
-const SearchCardContainer = ({ term }) => {
+const SearchCardContainer = ({ term, handleCreateRoom }) => {
     const { data, loading } = useQuery(SEARCH, {
         skip: term.value === "",
         variables: { 
@@ -18,6 +18,7 @@ const SearchCardContainer = ({ term }) => {
         <SearchCardPresenter
             data={data}
             loading={loading}
+            handleCreateRoom={handleCreateRoom}
         />
     );
 };
@@ -26,6 +27,7 @@ SearchCardContainer.propTypes = {
     term: PropTypes.shape({
         value: PropTypes.string.isRequired
     }).isRequired,
+    handleCreateRoom: PropTypes.func
 };
 
 export default SearchCardContainer;

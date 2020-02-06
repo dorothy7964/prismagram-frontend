@@ -29,3 +29,11 @@ export const READCOUNT_MESSAGE = gql`
         readcountMessage(roomId: $roomId)
     }
 `;
+
+export const CREATE_ROOM = gql`
+    mutation createRoom($toId: String!){
+        createRoom(toId:$toId){
+            id
+        }
+    }
+`;

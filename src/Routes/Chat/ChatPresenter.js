@@ -45,7 +45,8 @@ export default ({
     loading, 
     handleEnterRoom,
     searchTerm,
-    onSubmit
+    onSubmit,
+    handleCreateRoom
 }) => {
     if(loading === true){
         return (
@@ -69,6 +70,7 @@ export default ({
                     </Form>    
                     <SearchCard 
                         term={searchTerm}
+                        handleCreateRoom={handleCreateRoom}
                     />
                     {data.seeRooms.map(room => (
                         <ChatCard 
