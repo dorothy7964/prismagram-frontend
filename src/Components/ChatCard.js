@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Avatar from "./Avatar";
 import FatText from './FatText';
 import TimeIapse from "./TimeIapse";
+import { Delete } from "./Icons";
+
 
 const Card = styled.button`
     color: inherit;
@@ -18,6 +20,9 @@ const Card = styled.button`
     background-color: #fff;
     &:hover {
         background-color: ${props => props.theme.bgColor}
+        span {
+            display: block;
+        }
     }
 `;
 
@@ -28,7 +33,7 @@ const CardMiddle = styled.div`
     display: flex;
     flex-direction: column;
     align-items: baseline;
-    padding: 0 15px;
+    padding: 0 10px;
 `;
 
 const Message = styled.div`
@@ -64,6 +69,13 @@ const ChatCount = styled.div`
     font-weight:bold;
 `;
 
+const DeleteChat = styled.span`
+    display: none;
+    flex: 1;
+    cursor: pointer;
+    margin-left: 5px;
+`;
+
 const ChatCard = ({
     id, 
     participants, 
@@ -71,16 +83,17 @@ const ChatCard = ({
     lastMessage,
     lastMsgTime, 
     me,
-    handleEnterRoom
+    handleEnterRoom,
+    handleDeleteRoom
 }) => {
     participants = participants.filter(participant => participant.id !== me.id);
     const avatar = participants[0].avatar;
     const userName = participants[0].userName;
     
     return (
-        <Card onClick={() => handleEnterRoom(id)}>
+        <Card>
             <CardAvatar size={"md"} url={avatar} />
-            <CardMiddle>
+            <CardMiddle onClick={() => handleEnterRoom(id)}>
                 <FatText text={userName} />
                 <Message>{lastMessage}</Message>
             </CardMiddle>
@@ -92,6 +105,9 @@ const ChatCard = ({
                     {unReadMsgCounter === 0 ? "" : unReadMsgCounter }
                 </ChatCount>
             </CardLast>
+            <DeleteChat onClick={() => handleDeleteRoom(id)}>
+                <Delete />
+            </DeleteChat>
         </Card>
     );
 };

@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useQuery, useMutation } from '@apollo/client';
-import { ROOMS_QUERY, READCOUNT_MESSAGE, CREATE_ROOM } from "./ChatQueries";
+import {
+    ROOMS_QUERY, 
+    READCOUNT_MESSAGE, 
+    CREATE_ROOM, 
+    DELETE_ROOM 
+} from "./ChatQueries";
 import ChatPresenter from "./ChatPresenter";
 import useInput from "../../Hooks/useInput";
 
@@ -8,13 +13,14 @@ export default ({ history }) => {
     const search = useInput("");
     const { data, loading, refetch } = useQuery(ROOMS_QUERY);
     const [readcountMsgMutation] = useMutation(READCOUNT_MESSAGE);
-    const [createRoomMutaion] = useMutation(CREATE_ROOM,{
+    const [deleteRoomMutaion] = useMutation(DELETE_ROOM);
+    const [createRoomMutaion] = useMutation(CREATE_ROOM, {
         refetchQueries:() => [{
             query: ROOMS_QUERY,
             variables:{}
         }]
     });
-
+  
     const onSearchSubmit = (e) =>{
         e.preventDefault();
     }
@@ -33,13 +39,27 @@ export default ({ history }) => {
             console.log(e);
         }
     }
+
+    const handleDeleteRoom =async (roomId)=>{
+        try {
+            await deleteRoomMutaion({
+                refetchQueries:() => [{
+                    query: ROOMS_QUERY,
+                }],
+                variables: {
+                    roomId
+                }
+            }); 
+        } catch(e) {
+            console.log(e);
+        }
+    }
     
     const handleEnterRoom = async (id)=>{
         try {
             const { data } = await readcountMsgMutation({
                 refetchQueries:() => [{
                     query: ROOMS_QUERY,
-
                 }],
                 variables: {
                     roomId: id
@@ -48,7 +68,6 @@ export default ({ history }) => {
             if(data.readcountMessage){
                 history.push(`/chat/${id}`);
             }
-
         } catch(e) {
             console.log(e);
             console.log("ChatContainer");
@@ -67,6 +86,7 @@ export default ({ history }) => {
             searchTerm={search}
             onSubmit={onSearchSubmit}
             handleCreateRoom={handleCreateRoom}
+            handleDeleteRoom={handleDeleteRoom}
         />
     );
 

@@ -37,3 +37,11 @@ export const CREATE_ROOM = gql`
         }
     }
 `;
+
+export const DELETE_ROOM = gql`
+    mutation deleteRoom($roomId: String!){
+        deleteRoom(roomId:$roomId){
+            id
+        }
+    }
+`;

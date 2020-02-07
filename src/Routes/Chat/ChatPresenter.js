@@ -46,7 +46,8 @@ export default ({
     handleEnterRoom,
     searchTerm,
     onSubmit,
-    handleCreateRoom
+    handleCreateRoom,
+    handleDeleteRoom
 }) => {
     if(loading === true){
         return (
@@ -82,6 +83,7 @@ export default ({
                             unReadMsgCounter={room.unReadMsgCounter}
                             me={data.me}
                             handleEnterRoom={handleEnterRoom}
+                            handleDeleteRoom={handleDeleteRoom}
                         />
                     ))}
                 </Chat>

@@ -49,21 +49,21 @@ const SearchCardPresenter = ({ data, loading, handleCreateRoom }) => {
 
         return (
             <React.Fragment>
-            {data.searchUser.length === 0? (
-                <Wrapper>
-                    <FatText text="No Users Found" />
-                </Wrapper>
-            ) : (
+                {data.searchUser.length === 0? (
                     <Wrapper>
-                        {searchUser.map(user => (
-                        <Card key={user.id} >
-                            <Avatar size={"sm"} url={user.avatar} />
-                            <CardFatText text={user.userName} />
-                            <CardButton onClick={() => handleCreateRoom(user.id)}>채팅하러가기</CardButton>
-                        </Card>
-                     ))}
+                        <FatText text="No Users Found" />
                     </Wrapper>
-            )}
+                ) : (
+                        <Wrapper>
+                            {searchUser.map(user => (
+                            <Card key={user.id} >
+                                <Avatar size={"sm"} url={user.avatar} />
+                                <CardFatText text={user.userName} />
+                                <CardButton onClick={() => handleCreateRoom(user.id)}>채팅하러가기</CardButton>
+                            </Card>
+                        ))}
+                        </Wrapper>
+                )}
             </React.Fragment>
         );
     }
