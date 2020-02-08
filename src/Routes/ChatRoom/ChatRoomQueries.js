@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client';
 
+export const ROOMS_QUERY = gql`
+    {
+        seeRooms {
+            id
+        }
+    }
+`;
+
 export const SEE_ROOM = gql`
     query seeRoom($id:String!){
         seeRoom(id: $id){
@@ -72,4 +80,14 @@ export const NEW_MESSAGE = gql`
         }
     }
 `;
+
+
+export const DELETE_ROOM = gql`
+    mutation deleteRoom($roomId: String!){
+        deleteRoom(roomId:$roomId){
+            id
+        }
+    }
+`;
+
 

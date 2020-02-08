@@ -33,11 +33,16 @@ const CardAvatar = styled(Avatar)``;
 
 const CardLink = styled(Link)`
     color: inherit;
-    margin-left: 10px;
-    width: 350px;
+    margin: 0 10px;
+    width: 250px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+`;
+
+const DeleteChat = styled.span`
+    color: ${props => props.theme.redColor};
+    cursor: pointer;
 `;
 
 const ChatContents = styled.div`
@@ -104,13 +109,15 @@ const SendButton = styled.span`
 `;
 
 export default ({ 
+    roomId,
     data,
     loading,
     sendLoading,
     newMessage,
     onKeyPress,
     onSubmit,
-    chatLocation
+    chatLocation,
+    handleDeleteRoom
 }) => {
     if(loading === true){
         return (
@@ -137,6 +144,9 @@ export default ({
                         <CardLink to={`/${toUserName}`}>
                             <FatText text={toUserName} />
                         </CardLink>
+                        <DeleteChat onClick={() => handleDeleteRoom(roomId)}>
+                            <FatText text="채팅방 나가기" />
+                        </DeleteChat>
                     </ChatTop>
                     <ChatContents>
                         <div ref={chatLocation}>

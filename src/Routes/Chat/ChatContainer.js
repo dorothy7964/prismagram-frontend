@@ -40,7 +40,7 @@ export default ({ history }) => {
         }
     }
 
-    const handleDeleteRoom =async (roomId)=>{
+    const handleDeleteRoom = async (roomId)=>{
         try {
             await deleteRoomMutaion({
                 refetchQueries:() => [{

@@ -2,14 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation } from '@apollo/client';
 import { READCOUNT_MESSAGE } from "../Chat/ChatQueries";
-import { SEE_ROOM, SEND_MESSAGE, NEW_MESSAGE } from "./ChatRoomQueries";
+import { 
+    ROOMS_QUERY, 
+    SEE_ROOM, 
+    SEND_MESSAGE, 
+    NEW_MESSAGE, 
+    DELETE_ROOM 
+} from "./ChatRoomQueries";
 import ChatRoomPresenter from "./ChatRoomPresenter";
 import useInput from "../../Hooks/useInput";
 
-export default ({ match: { params: { roomId } }}) => {
+export default ({ match: { params: { roomId } }, history}) => {
     const messageInput = useInput("");
     const chatLocation = useRef(null);
     const [sendLoading, setSendLoading] = useState(false);
+    const { refetch } = useQuery(ROOMS_QUERY);
+    const [deleteRoomMutaion] = useMutation(DELETE_ROOM);
     const { data, loading, subscribeToMore } = useQuery(SEE_ROOM, {
         variables: {
             id: roomId
@@ -88,6 +96,22 @@ export default ({ match: { params: { roomId } }}) => {
        }
     };
 
+    const handleDeleteRoom = async (roomId)=>{
+        history.push("/chat");
+        try {
+            await deleteRoomMutaion({
+                refetchQueries:() => [{
+                    query: ROOMS_QUERY,
+                }],
+                variables: {
+                    roomId
+                }
+            }); 
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
     const scrollBottom = () => {
         chatLocation.current.scrollIntoView({ block: 'end', behavior: 'smooth' })
     }
@@ -104,6 +128,7 @@ export default ({ match: { params: { roomId } }}) => {
 
     return (
         <ChatRoomPresenter 
+            roomId={roomId}
             data={data}
             loading={loading}
             sendLoading={sendLoading}
@@ -111,6 +136,7 @@ export default ({ match: { params: { roomId } }}) => {
             onKeyPress={onKeyPress}
             onSubmit={onSubmit}
             chatLocation={chatLocation}
+            handleDeleteRoom={handleDeleteRoom}
         />
     );
 };
