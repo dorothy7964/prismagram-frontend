@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { HeartFull, CommentFull } from "./Icons";
+import { Photos, HeartFull, CommentFull } from "./Icons";
 
 const Overlay = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
@@ -19,6 +19,7 @@ const Overlay = styled.div`
 `;
 
 const Container = styled(Link)`
+    position: relative;
     user-select: none;
     background-image: url(${props => props.bg});
     background-size: cover;
@@ -28,6 +29,12 @@ const Container = styled(Link)`
         opacity: 1;
       }
     }
+`;
+
+const PhotoIcon = styled.span`
+    position: absolute;
+    top: 10px;
+    right: 5px;
 `;
 
 const Number = styled.div`
@@ -41,12 +48,17 @@ const Number = styled.div`
 
 const NumberText = styled.span`
     margin-left: 10px;
-    font-size: 16px;
+    font-size: 10px;
 `;
 
-const SquarePost = ({ id, file, likeCount, commentCount }) => {
+const SquarePost = ({ id, file, filesCount, likeCount, commentCount }) => {
     return (
         <Container to={`/FullFeed/${id}`} bg={file.url} >
+            {filesCount.length === 1 ? "" : (
+                <PhotoIcon>
+                    <Photos />
+                </PhotoIcon>
+            )}
             <Overlay>
                 <Number>
                     <HeartFull />
@@ -64,6 +76,7 @@ const SquarePost = ({ id, file, likeCount, commentCount }) => {
 SquarePost.propTypes = {
     id: PropTypes.string.isRequired,
     file: PropTypes.object.isRequired,
+    filesCount: PropTypes.array,
     likeCount: PropTypes.number.isRequired,
     commentCount: PropTypes.number.isRequired
 };

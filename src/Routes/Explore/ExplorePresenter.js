@@ -117,6 +117,7 @@ export default ({ data, loading }) => {
                                     key={post.id}
                                     id={post.id}
                                     file={post.files[0]}
+                                    filesCount={post.files}
                                     likeCount={post.likeCount}
                                     commentCount={post.commentCount}
                                 />
