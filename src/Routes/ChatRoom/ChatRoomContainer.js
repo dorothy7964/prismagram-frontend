@@ -16,7 +16,6 @@ export default ({ match: { params: { roomId } }, history}) => {
     const messageInput = useInput("");
     const chatLocation = useRef(null);
     const [sendLoading, setSendLoading] = useState(false);
-    const { refetch } = useQuery(ROOMS_QUERY);
     const [deleteRoomMutaion] = useMutation(DELETE_ROOM);
     const { data, loading, subscribeToMore } = useQuery(SEE_ROOM, {
         variables: {

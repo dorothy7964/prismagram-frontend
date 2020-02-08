@@ -55,7 +55,7 @@ export default ({
                 <Loader />
             </Wrapper>
         );
-    }else if(!loading && data && data.seeRooms) {
+    } else if(!loading && data && data.seeRooms) {
         return (
             <Wrapper>
                 <Helmet>

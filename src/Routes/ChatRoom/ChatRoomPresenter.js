@@ -125,7 +125,13 @@ export default ({
                 <Loader />
             </Wrapper>
         );
-    }else if(!loading && data && data.seeRoom){
+    } else if(!data){
+        return (
+            <Wrapper>
+                <Loader />
+            </Wrapper>
+        );
+    } else if(!loading && data && data.seeRoom){
         const me = data.me.id;
         const { messages } = data.seeRoom;
         const { participants } = data.seeRoom;
