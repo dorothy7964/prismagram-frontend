@@ -28,7 +28,7 @@ export default ({ data, loading }) => {
                 <Loader />
             </Wrapper>
         );
-    }else if(!loading && data && data.me) {
+    } else if(!loading && data && data.me) {
         const {
             me: { followers }
         } = data;        

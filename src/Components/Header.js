@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { gql } from "apollo-boost";
 import { useQuery } from "react-apollo-hooks";
 import useInput from "../Hooks/useInput";
+import NoticeLike from "./NoticeLike";
 import Input from "./Input";
-import { Logo, Compass, HeartEmpty, User, Send } from "./Icons";
+import { Logo, Compass, User, Send } from "./Icons";
 
 
 const Header = styled.header`
@@ -64,6 +65,14 @@ const HeaderLink = styled(Link)`
     }
 `;
 
+const HeaderNotice = styled.button`
+    margin-right: 30px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    background-color: inherit;
+`;
+
 const ME = gql`
     {
         me {
@@ -74,11 +83,17 @@ const ME = gql`
 
 export default withRouter(({ history }) => {
     const search = useInput("");
+    const [ toggleButton, setToggleButton ] = useState(false);
     const { data } = useQuery(ME);
     const onSearchSubmit = e => {
         e.preventDefault();
         history.push(`/search/${search.value}`);
     };
+
+    const handleButton = () => {
+        setToggleButton(!toggleButton);
+    }
+    
     return(
         <Header>
             <HeaderWrapper>
@@ -100,9 +115,9 @@ export default withRouter(({ history }) => {
                     <HeaderLink to="/explore">
                         <Compass />
                     </HeaderLink>
-                    <HeaderLink to="/notifications">
-                        <HeartEmpty />
-                    </HeaderLink>
+                    <HeaderNotice onClick={handleButton}>
+                        <NoticeLike toggleButton={toggleButton} />
+                    </HeaderNotice>
                    {!(data && data.me)? (
                         <HeaderLink to="/#">
                             <User />

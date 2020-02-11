@@ -25,7 +25,7 @@ export default ({ history }) => {
         e.preventDefault();
     }
 
-    const handleCreateRoom =async (toId)=>{
+    const handleCreateRoom = async (toId)=>{
         try {
             const {
                 data: { createRoom }

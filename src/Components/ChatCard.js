@@ -6,7 +6,6 @@ import FatText from './FatText';
 import TimeIapse from "./TimeIapse";
 import { Delete } from "./Icons";
 
-
 const Card = styled.button`
     color: inherit;
     display: flex;
