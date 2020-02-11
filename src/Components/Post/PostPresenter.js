@@ -67,7 +67,7 @@ const Button = styled.span`
 
 const Buttons = styled.div`
     ${Button} {
-        &:not(:last-child) {
+        &:first-child {
             margin-right: 10px;
         }
     }
@@ -173,11 +173,6 @@ export default ({
                 <Button>
                     <Link to={`/FullFeed/${id}`}>
                         <CommentIcon />
-                    </Link>
-                </Button>
-                <Button>
-                    <Link to={`/chat/${id}`}>
-                        <Send />
                     </Link>
                 </Button>
             </Buttons>

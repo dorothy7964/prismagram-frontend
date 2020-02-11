@@ -7,7 +7,6 @@ import {
     HeartFull, HeartEmpty, 
     Comment as CommentIcon, 
     Next, Prev,
-    Send
 } from "../Icons";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
@@ -87,9 +86,8 @@ const Button = styled.span`
 
 const Buttons = styled.div`
     ${Button} {
-        margin-left: 10px;
         &:first-child {
-            margin-left: 0;
+            margin-right: 10px;
         }
     }
     padding: 15px;
@@ -232,11 +230,6 @@ export default ({
                 </Button>
                 <Button>
                     <CommentIcon />
-                </Button>
-                <Button>
-                    <Link to={`/chat}`}>
-                        <Send />
-                    </Link>
                 </Button>
                 <Timestamp>{ moment(createdAt).format("YYYY.MM.DD HH:MM") }</Timestamp>
             </Buttons>
