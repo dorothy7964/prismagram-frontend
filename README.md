@@ -26,7 +26,7 @@ DEMO [prisma-gram](https://prisma-gram.netlify.com/#/)
 
 * 사진 업로드 : 사진과 함께 포스트 
 
-<u>프로필 사진 수정: AWS S3를 사용해 이미지 저장</u>
+* 프로필 사진 수정: AWS S3를 사용해 이미지 저장
 
 * 좋아요 등록 기능
 
@@ -34,7 +34,7 @@ DEMO [prisma-gram](https://prisma-gram.netlify.com/#/)
 
 * 실시간 채팅 기능
 
-<u>firebase analytics를 logEvent 분석</u>
+* firebase analytics를 logEvent 분석
 <br>
 
 ## 첨부
