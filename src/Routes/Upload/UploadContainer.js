@@ -28,6 +28,8 @@ export default ({ history }) => {
         ? "http://localhost:4000"
         : "https://prisma-gram-backend.herokuapp.com"
 
+    console.log(url);
+
     const handleChange = async (e) => {
         if(blobFile.length >= 5){
             return toast.error("사진 5장 까지 업로드 가능합니다.");
