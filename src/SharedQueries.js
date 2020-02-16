@@ -1,5 +1,38 @@
 import { gql } from "apollo-boost";
 
+// Feed 에서 사용
+export const FEED_QUERY = gql`
+    query paginateFeed($pageNumber: Int!, $items: Int!){
+        paginateFeed(pageNumber: $pageNumber, items: $items){
+            id
+            location
+            caption
+            user {
+                id
+                userName
+                avatar
+            }
+            files {
+                id
+                url
+            }
+            isLiked
+            likeCount
+            commentCount
+            comments {
+                id
+                text
+                user {
+                    id
+                    userName
+                }
+                createdAt
+            }
+            createdAt
+        }
+    }
+`;
+
 // TOGGLE_LIKE, ADD_COMMENT = FullPost, Post 에서 동일하게 사용
 export const TOGGLE_LIKE = gql`
     mutation toggelLike($postId: String!) {

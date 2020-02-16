@@ -1,44 +1,15 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ClipLoader } from "react-spinners";
 import { css } from "@emotion/core";
 import { gql, useQuery } from '@apollo/client';
+import { FEED_QUERY } from "../SharedQueries"
+import { Upload } from "../Components/Icons";
 import Loader from "../Components/Loader";
 import Post from "../Components/Post";
-
-const FEED_QUERY = gql`
-    query paginateFeed($pageNumber: Int!, $items: Int!){
-        paginateFeed(pageNumber: $pageNumber, items: $items){
-            id
-            location
-            caption
-            user {
-                id
-                userName
-                avatar
-            }
-            files {
-                id
-                url
-            }
-            isLiked
-            likeCount
-            commentCount
-            comments {
-                id
-                text
-                user {
-                    id
-                    userName
-                }
-                createdAt
-            }
-            createdAt
-        }
-    }
-`;
 
 const Wrapper = styled.div`
     min-height: 80vh;
@@ -59,6 +30,12 @@ const ScrollableDiv = styled(InfiniteScroll)`
 const Spinners = css`
     display: block;
     margin: 0 auto;
+`;
+
+const UploadContainer = styled.div`
+    position: fixed;
+    top: 20%;
+    right: 20%;
 `;
 
 export default () => {
@@ -131,6 +108,11 @@ export default () => {
                         />
                     ))}
                 </ScrollableDiv>
+                <UploadContainer>
+                    <Link to="/upload">
+                        <Upload size="27" />
+                    </Link>
+                </UploadContainer>
             </Wrapper>
         );
     }

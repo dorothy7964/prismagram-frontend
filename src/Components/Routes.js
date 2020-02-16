@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from "react-router-dom";
 import Auth from "../Routes/Auth";
 import Feed from "../Routes/Feed";
+import Upload from "../Routes/Upload";
 import FullFeed from "../Routes/FullFeed";
 import Search from "../Routes/Search";
 import Explore from "../Routes/Explore";
@@ -15,6 +16,7 @@ import Profile from "../Routes/Profile";
 const LoggedInRoutes = () => (
     <Switch>
         <Route exact path="/" component={Feed} />
+        <Route path="/upload" component={Upload} />
         <Route path="/fullFeed/:id" component={FullFeed} />
         <Route path="/search/:term" component={Search} />
         <Route path="/explore" component={Explore} />
