@@ -28,7 +28,6 @@ export default ({ history }) => {
         ? "http://localhost:4000"
         : "https://prisma-gram-backend.herokuapp.com"
 
-    console.log(url);
 
     const handleChange = async (e) => {
         if(blobFile.length >= 5){
@@ -66,6 +65,10 @@ export default ({ history }) => {
                     "content-type": "multipart/form-data",
                     "Access-Control-Allow-Origin": "*"
                 }
+            }).then(response => {
+                console.log('file upload response', response);
+            }).error(error => {
+                console.log('file upload error', error);
             });
             
             const {
