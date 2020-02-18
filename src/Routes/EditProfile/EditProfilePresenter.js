@@ -26,12 +26,6 @@ const UserColumn = styled.div`
     margin-left: 10px;
 `;
 
-const PhotoLink = styled(Link)`
-    display: block;
-    margin-top: 5px;
-    font-size: 12px;
-`;
-
 const Text = styled.div``;
 
 const Box = styled.div`
@@ -108,9 +102,6 @@ export default ({
                             <Avatar size="md" url={seeUser.avatar} />
                             <UserColumn>
                                 <FatText text={seeUser.userName} />
-                                <PhotoLink to="/#">
-                                    <FatText text="프로필 사진 바꾸기" />
-                                </PhotoLink>
                             </UserColumn>
                         </Header>
                         <form onSubmit={onSubmit}>

@@ -42,7 +42,7 @@ export default ({ history }) => {
             awsFile.push(value);
         }
     }
-    
+        
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (captionInput.value === "") {
@@ -63,12 +63,8 @@ export default ({ history }) => {
             } = await axios.post(`${url}/api/uploads`, formData, {
                 headers: {
                     "content-type": "multipart/form-data",
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
                 }
-            }).then(response => {
-                console.log('file upload response', response);
-            }).error(error => {
-                console.log('file upload error', error);
             });
             
             const {

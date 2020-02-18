@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import { FadeLoader } from "react-spinners";
+import { css } from "@emotion/core";
 import Loader from "../../Components/Loader";
 import Avatar from "../../Components/Avatar";
 import Button from "../../Components/Button";
 import FollowButton from "../../Components/FollowButton";
 import FatText from "../../Components/FatText";
 import SquarePost from "../../Components/SquarePost";
-import { Edit } from "../../Components/Icons";
+import { Edit, Upload } from "../../Components/Icons";
 
 const Wrapper = styled.div`
     min-height: 100vh;
@@ -23,7 +25,25 @@ const Header = styled.header`
     margin-bottom: 40px;
 `;
 
-const HeaderColumn = styled.div``;
+const HeaderColumn = styled.div`
+    position:relative;
+`;
+
+const override = css`
+    position: absolute;
+    top: 45%;
+    left: 47%;
+`;
+
+const HiddenInput = styled.input`
+    display: none;
+`;
+
+const ProfileUpload = styled.label`
+    position:absolute;
+    right: 0;
+    bottom: 13px;
+`;
 
 const UserNameRow = styled.div`
     display: flex;
@@ -68,7 +88,12 @@ const Posts = styled.div`
     grid-gap: 28px;;
 `;
 
-export default ({ data, loading, logOut }) => {
+export default ({ data, 
+    loading, 
+    logOut, 
+    fileLoading, 
+    handleChange 
+}) => {
     if(loading === true){
         return (
             <Wrapper>
@@ -99,6 +124,25 @@ export default ({ data, loading, logOut }) => {
                 <Header>
                     <HeaderColumn>
                         <Avatar size="lg" url={avatar} />
+                        {isSelf && (
+                            <ProfileUpload htmlFor="fileElem">
+                                <Upload size="30" />
+                            </ProfileUpload>
+                        )}
+                        {fileLoading && 
+                            <FadeLoader
+                                css={override}
+                                size={35}
+                                color={"#003569"}
+                            />
+                        }
+                        <HiddenInput 
+                            type="file" 
+                            id="fileElem" 
+                            accept="image/*" 
+                            onChange={handleChange} 
+                            multiple
+                        />
                     </HeaderColumn>
                     <HeaderColumn>
                         <UserNameRow>

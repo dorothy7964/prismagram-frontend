@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import TextareaAutosize from "react-textarea-autosize";
 import moment from "moment";
-import { HeartFull, HeartEmpty, Comment as CommentIcon, Send } from "../Icons";
+import { HeartFull, HeartEmpty, Comment as CommentIcon } from "../Icons";
 import Avatar from "../Avatar";
 import FatText from "../FatText";
 import TimeIapse from "../TimeIapse";
