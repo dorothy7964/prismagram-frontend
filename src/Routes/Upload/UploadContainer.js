@@ -26,7 +26,7 @@ export default ({ history }) => {
 
     const url = process.env.NODE_ENV === "development"
         ? "http://localhost:4000"
-        : "http://prisma-gram-backend.herokuapp.com"
+        : "https://prisma-gram-backend.herokuapp.com"
 
 
     const handleChange = async (e) => {
