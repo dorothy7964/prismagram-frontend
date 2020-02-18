@@ -36,13 +36,18 @@ const override = css`
 `;
 
 const HiddenInput = styled.input`
-    display: none;
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
 `;
 
 const ProfileUpload = styled.label`
     position:absolute;
     right: 0;
     bottom: 13px;
+    cursor: pointer;
 `;
 
 const UserNameRow = styled.div`
