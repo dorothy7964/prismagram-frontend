@@ -5,7 +5,7 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ClipLoader } from "react-spinners";
 import { css } from "@emotion/core";
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { FEED_QUERY } from "../SharedQueries"
 import { Upload } from "../Components/Icons";
 import Loader from "../Components/Loader";
