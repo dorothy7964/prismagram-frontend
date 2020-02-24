@@ -37,7 +37,8 @@ export default ({ match: { params: { userName } } }) => {
                     "content-type": "multipart/form-data",
                     "Access-Control-Allow-Origin": "*"
                 }
-            });
+            }).then(res => console.log("성공", res))
+              .catch(error => console.log(error));;
             
             const {
                 data: { editUser }
