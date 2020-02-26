@@ -4,8 +4,8 @@ import { HashRouter as Router } from "react-router-dom";
 import { gql, useQuery } from '@apollo/client';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import styled, { ThemeProvider } from "styled-components";
 import GlobalStyles from '../Styles/GlobalStyles';
 import Theme from "../Styles/Theme";
@@ -36,6 +36,11 @@ export default () => {
         <Helmet
           htmlAttributes={{ lang: 'ko' }}
           meta={[{ charset: 'UTF-8' }]}
+          link={[{
+            rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css',
+          }, {
+            rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css',
+          }]}
         />
         <GlobalStyles />
         <Router>
