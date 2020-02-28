@@ -80,7 +80,13 @@ export default ({ data, loading }) => {
                 <Loader />
             </Wrapper>
         );
-    }else if(!loading && data && data.randomUser && data.randomPost){
+    } else if(!data.randomUser || !data.randomPost){
+        return (
+            <Wrapper>
+                <div>다른 계정들이 추가되지 않았습니다.</div>
+            </Wrapper>
+        );
+    } else if(!loading && data && data.randomUser && data.randomPost){
         return (
             <Wrapper>
                 <Helmet>
