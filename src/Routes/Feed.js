@@ -13,6 +13,18 @@ import Post from "../Components/Post";
 
 const Wrapper = styled.div`
     min-height: 80vh;
+    align-items: center;
+`;
+
+const TextWrapper = styled.div`
+    min-height: 80vh;
+    display: flex;
+`;
+
+const Text = styled.div`
+    width: 100%;
+    text-align: center;
+    font-size: large;
 `;
 
 const ScrollableDiv = styled(InfiniteScroll)`
@@ -76,6 +88,22 @@ export default () => {
                 <Loader />
             </Wrapper>
         )
+    } else if(data.paginateFeed.length === 0){
+        return (
+            <TextWrapper>
+                <Helmet>
+                    <title>Feed | Prismagram</title>
+                </Helmet>
+                <Text>
+                    사진을 업로드 해주세요.
+                </Text>
+                <UploadContainer>
+                    <Link to="/upload">
+                        <Upload size="27" />
+                    </Link>
+                </UploadContainer>
+            </TextWrapper>
+        );
     } else if (data && data.paginateFeed){
         return (
             <Wrapper>
