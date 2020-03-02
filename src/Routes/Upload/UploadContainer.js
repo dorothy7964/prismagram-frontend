@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation } from "react-apollo-hooks";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -10,8 +10,8 @@ import UploadPresenter from "./UploadPresenter";
 export default ({ history }) => {
     const captionInput = useInput("");
     const locationInput = useInput("");
-    const [awsFile, setAwsFile] = useState([]);
-    const [blobFile, setBlobFile] = useState([]);
+    const awsFile = useState([])[0];
+    const blobFile = useState([])[0];
     const [isFile, setIsFile] = useState({});
     const [loading, setLoading] = useState(false);
     const [uploadMutation] = useMutation(UPLOAD, {
@@ -37,7 +37,7 @@ export default ({ history }) => {
         const files = e.target.files;
         setIsFile(files);
         for(var value of files){
-            var obj = URL.createObjectURL(value);
+            var obj = window.URL.createObjectURL(value);
             blobFile.push(obj);
             awsFile.push(value);
         }
@@ -86,6 +86,10 @@ export default ({ history }) => {
             setLoading(false);
         }
     }
+
+    useEffect(() => {
+        return () => window.URL.revokeObjectURL(blobFile);
+    }, []);
 
     return (
         <UploadPresenter
