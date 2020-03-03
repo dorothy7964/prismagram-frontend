@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Avatar from "./Avatar";
 import FatText from './FatText';
 import TimeIapse from "./TimeIapse";
 import { Delete } from "./Icons";
+import { NEW_MESSAGE } from "../Routes/ChatRoom/ChatRoomQueries"
 
 const Card = styled.button`
     color: inherit;
@@ -83,11 +84,27 @@ const ChatCard = ({
     lastMsgTime, 
     me,
     handleEnterRoom,
-    handleDeleteRoom
+    handleDeleteRoom,
+    refetch,
+    subscribeToMore
 }) => {
     participants = participants.filter(participant => participant.id !== me.id);
     const avatar = participants[0].avatar;
     const userName = participants[0].userName;
+
+    const more = () => subscribeToMore({
+        document: NEW_MESSAGE,
+        variables: {
+            roomId: id
+        },
+        updateQuery: () => {
+            refetch();
+        }
+    });
+
+    useEffect(() => {
+        more();
+    }, []);
     
     return (
         <Card>

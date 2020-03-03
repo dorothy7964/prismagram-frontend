@@ -11,7 +11,7 @@ import useInput from "../../Hooks/useInput";
 
 export default ({ history }) => {
     const search = useInput("");
-    const { data, loading, refetch } = useQuery(ROOMS_QUERY);
+    const { data, loading, refetch, subscribeToMore } = useQuery(ROOMS_QUERY);
     const [readcountMsgMutation] = useMutation(READCOUNT_MESSAGE);
     const [deleteRoomMutaion] = useMutation(DELETE_ROOM);
     const [createRoomMutaion] = useMutation(CREATE_ROOM, {
@@ -82,6 +82,8 @@ export default ({ history }) => {
         <ChatPresenter
             data={data} 
             loading={loading} 
+            refetch={refetch}
+            subscribeToMore={subscribeToMore}
             handleEnterRoom={handleEnterRoom}
             searchTerm={search}
             onSubmit={onSearchSubmit}

@@ -43,6 +43,8 @@ const SearchInput = styled(Input)`
 export default ({ 
     data, 
     loading, 
+    refetch,
+    subscribeToMore,
     handleEnterRoom,
     searchTerm,
     onSubmit,
@@ -84,6 +86,8 @@ export default ({
                             me={data.me}
                             handleEnterRoom={handleEnterRoom}
                             handleDeleteRoom={handleDeleteRoom}
+                            refetch={refetch}
+                            subscribeToMore={subscribeToMore}
                         />
                     ))}
                 </Chat>
