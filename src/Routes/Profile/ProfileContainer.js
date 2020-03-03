@@ -19,7 +19,7 @@ export default ({ match: { params: { userName } } }) => {
         }]
     });
     const [logOut] = useMutation(LOG_OUT);
-
+    
     const url = process.env.NODE_ENV === "development"
         ? "http://localhost:4000"
         : "https://prisma-gram-backend.herokuapp.com"

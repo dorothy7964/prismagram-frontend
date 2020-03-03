@@ -93,19 +93,20 @@ const Posts = styled.div`
     grid-gap: 28px;;
 `;
 
-export default ({ data, 
+export default ({ 
+    data, 
     loading, 
     logOut, 
     fileLoading, 
     handleChange 
 }) => {
-    if(loading === true){
+    if (loading === true){
         return (
             <Wrapper>
                 <Loader />
             </Wrapper>
         );
-    }else if(!loading && data && data.seeUser) {
+    } else if(!loading && data && data.seeUser) {
         const {
             seeUser: {
                 id,

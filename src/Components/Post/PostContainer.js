@@ -24,25 +24,12 @@ const PostContainer = ({
     const [currentItem, setCurrentItem] = useState(0);
     const [isLikedS, setIsLiked] = useState(isLiked);
     const [likeCountS, setLikeCount] = useState(likeCount);
-    const [commentCountS, setCommentCount] = useState(commentCount);
+    const commentCountS = useState(commentCount)[0];
     const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
         variables: { postId: id }
     });
     const [addCommentMutation] = useMutation(ADD_COMMENT, {
         variables: { postId: id, text: comment.value }
-    });
-    
-    const slide = () => {
-        const totalFiles = files.length;
-        if (currentItem === totalFiles - 1) {
-            setTimeout(() => setCurrentItem(0), 3000);
-        } else {
-            setTimeout(() => setCurrentItem(currentItem + 1), 3000);
-        }
-    };
-
-    useEffect(() => {
-        slide();
     });
 
     const toggleLike = () => {
@@ -50,7 +37,7 @@ const PostContainer = ({
         if(isLikedS === true){
             setIsLiked(false);
             setLikeCount(likeCountS - 1);
-        }else {
+        } else {
             setIsLiked(true);
             setLikeCount(likeCountS + 1);
         }
@@ -58,7 +45,7 @@ const PostContainer = ({
 
     const onKeyPress = async e => {
         const { which } = e;
-        if(which === 13){
+        if (which === 13){
             e.preventDefault();
             try {
                 setLoading(true);
@@ -67,14 +54,25 @@ const PostContainer = ({
                     data: { addComment } 
                 } = await addCommentMutation();
                 setSelfComments([...selfComments, addComment]);
-            }catch {
+            } catch {
                 console.log(e);
                 toast.error("Cant send comment");
-            }finally {
+            } finally {
                 setLoading(false);
             }
        }
     };
+
+    useEffect(() => {
+        const totalFiles = files.length;
+        let timer = null;
+        if (currentItem === totalFiles-1){
+            timer = setTimeout(() => setCurrentItem(0), 3000);
+        } else {
+            timer = setTimeout(() => setCurrentItem(currentItem + 1), 3000);
+        }
+        return () => clearTimeout(timer);
+    }, [currentItem, files]);
 
     return (
         <PostPresenter 
