@@ -16,10 +16,10 @@ const Card = styled.button`
     border: 0;
     outline: none;
     cursor: pointer;
-    user-select: none
+    user-select: none;
     background-color: #fff;
     &:hover {
-        background-color: ${props => props.theme.bgColor}
+        background-color: ${props => props.theme.bgColor};
         span {
             display: block;
         }
